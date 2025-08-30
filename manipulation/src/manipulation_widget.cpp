@@ -357,7 +357,7 @@ void ManipulationWidget::onGroupNameChanged()
       auto it = group_tcp_offsets.find(group_name);
       if (it != group_tcp_offsets.end())
       {
-        data_->tcp_offsets = it->second;
+        data_->tcp_offsets = tesseract_common::TransformMap{ it->second.begin(), it->second.end() };
         for (const auto& tcp_offset : data_->tcp_offsets)
           tcp_offset_sl.append(tcp_offset.first.c_str());
       }
