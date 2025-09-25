@@ -23,21 +23,15 @@
 #include <tesseract_qt/studio/studio.h>
 #include "ui_studio.h"
 
+#include <tesseract_common/plugin_loader.h>
 #include <tesseract_common/yaml_utils.h>
-#include <tesseract_common/yaml_extensions.h>
-#include <boost_plugin_loader/plugin_loader.hpp>
-
+#include <tesseract_common/yaml_extenstions.h>
 #include <filesystem>
-#include <fstream>
 
 #include <boost/program_options.hpp>
-#include <boost/algorithm/string/split.hpp>
-#include <boost/algorithm/string/classification.hpp>
-#include <boost/algorithm/string/constants.hpp>
 
 #include <yaml-cpp/yaml.h>
 
-#include <tesseract_qt/common/events/status_log_events.h>
 #include <tesseract_qt/common/icon_utils.h>
 #include <tesseract_qt/common/component_info.h>
 #include <tesseract_qt/common/component_info_manager.h>
@@ -84,7 +78,7 @@ struct Studio::Implementation
   QString default_directory;
 
   std::map<std::string, StudioDockWidgetFactory::Ptr> factories;
-  boost_plugin_loader::PluginLoader plugin_loader;
+  tesseract_common::PluginLoader plugin_loader;
   StudioPluginLoaderDialog plugin_loader_dialog;
 
   std::string central_widget;
@@ -268,9 +262,8 @@ void Studio::Implementation::loadConfig()
             StudioDockWidget* dock_widget = app->createDockWidget(name, it->second);
             if (dock_widget == nullptr)
             {
-              events::StatusLogError event(
-                  QString("Studio::loadConfig: Failed to load dock widget '%1' from config.").arg(it->first.c_str()));
-              QApplication::sendEvent(qApp, &event);
+              CONSOLE_BRIDGE_logError("Studio::loadConfig: Failed to load dock widget '%s' from config.",
+                                      it->first.c_str());
             }
             else
             {
@@ -287,11 +280,8 @@ void Studio::Implementation::loadConfig()
             StudioDockWidget* dock_widget = app->createDockWidget(name, plugin_info.second);
             if (dock_widget == nullptr)
             {
-              events::StatusLogError event(QString("Studio::loadConfig: Failed to load dock widget "
-                                                   "'%1' "
-                                                   "from config.")
-                                               .arg(plugin_info.first.c_str()));
-              QApplication::sendEvent(qApp, &event);
+              CONSOLE_BRIDGE_logError("Studio::loadConfig: Failed to load dock widget '%s' from config.",
+                                      plugin_info.first.c_str());
               continue;
             }
 
@@ -537,8 +527,7 @@ bool Studio::init(int argc, char** argv)
     {
       std::stringstream ss;
       ss << "Basic Command Line Parameter App" << std::endl << desc << std::endl;
-      events::StatusLogInfo event(ss.str().c_str());
-      QApplication::sendEvent(qApp, &event);
+      CONSOLE_BRIDGE_logInform(ss.str().c_str());
       return false;
     }
 
@@ -550,8 +539,7 @@ bool Studio::init(int argc, char** argv)
     std::stringstream ss;
     ss << "ERROR: " << e.what() << std::endl << std::endl;
     ss << desc << std::endl;
-    events::StatusLogError event(ss.str().c_str());
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logError(ss.str().c_str());
     return false;
   }
 
@@ -583,8 +571,8 @@ void Studio::closeEvent(QCloseEvent* event)
   QMainWindow::closeEvent(event);
 }
 
-boost_plugin_loader::PluginLoader& Studio::getPluginLoader() { return data_->plugin_loader; }
-const boost_plugin_loader::PluginLoader& Studio::getPluginLoader() const { return data_->plugin_loader; }
+tesseract_common::PluginLoader& Studio::getPluginLoader() { return data_->plugin_loader; }
+const tesseract_common::PluginLoader& Studio::getPluginLoader() const { return data_->plugin_loader; }
 
 StudioDockWidget* Studio::createDockWidget(const QString& name, const tesseract_common::PluginInfo& plugin_info)
 {
@@ -602,11 +590,10 @@ StudioDockWidget* Studio::createDockWidget(const QString& name, const tesseract_
       return dock_widget;
     }
 
-    auto plugin = data_->plugin_loader.createInstance<StudioDockWidgetFactory>(plugin_info.class_name);
+    auto plugin = data_->plugin_loader.instantiate<StudioDockWidgetFactory>(plugin_info.class_name);
     if (plugin == nullptr)
     {
-      events::StatusLogWarn event(QString("Failed to load symbol '%1'").arg(plugin_info.class_name.c_str()));
-      QApplication::sendEvent(qApp, &event);
+      CONSOLE_BRIDGE_logWarn("Failed to load symbol '%s'", plugin_info.class_name.c_str());
       return nullptr;
     }
     data_->factories[plugin_info.class_name] = plugin;
@@ -621,9 +608,7 @@ StudioDockWidget* Studio::createDockWidget(const QString& name, const tesseract_
   }
   catch (const std::exception& e)
   {
-    events::StatusLogWarn event(
-        QString("Failed to load symbol '%1', Details: %2").arg(plugin_info.class_name.c_str(), e.what()));
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logWarn("Failed to load symbol '%s', Details: %s", plugin_info.class_name.c_str(), e.what());
     return nullptr;
   }
 }

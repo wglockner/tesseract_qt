@@ -27,7 +27,7 @@
 namespace tesseract_gui::events
 {
 ContactResultsClear::ContactResultsClear(std::shared_ptr<const ComponentInfo> component_info, const std::string& ns)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::CONTACT_RESULTS_CLEAR)), ns_(ns)
+  : ComponentEvent(std::move(component_info), kType), ns_(ns)
 {
 }
 
@@ -40,9 +40,7 @@ const std::string& ContactResultsClear::getNamespace() const { return ns_; }
 ContactResultsSet::ContactResultsSet(std::shared_ptr<const ComponentInfo> component_info,
                                      const std::variant<ContactResultVector, ContactResultMap>& contact_results,
                                      const std::string& ns)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::CONTACT_RESULTS_SET))
-  , ns_(ns)
-  , contact_results_(contact_results)
+  : ComponentEvent(std::move(component_info), kType), ns_(ns), contact_results_(contact_results)
 {
 }
 
@@ -57,13 +55,13 @@ const std::variant<ContactResultVector, ContactResultMap>& ContactResultsSet::ge
 //////////////////////////////////////////
 
 ContactResultsRemove::ContactResultsRemove(std::shared_ptr<const ComponentInfo> component_info, boost::uuids::uuid uuid)
-  : ComponentEventUUID(std::move(component_info), uuid, QEvent::Type(EventType::CONTACT_RESULTS_REMOVE))
+  : ComponentEventUUID(std::move(component_info), uuid, kType)
 {
 }
 ContactResultsRemove::ContactResultsRemove(std::shared_ptr<const ComponentInfo> component_info,
                                            boost::uuids::uuid uuid,
                                            boost::uuids::uuid child_uuid)
-  : ComponentEventUUID(std::move(component_info), uuid, child_uuid, QEvent::Type(EventType::CONTACT_RESULTS_REMOVE))
+  : ComponentEventUUID(std::move(component_info), uuid, child_uuid, kType)
 {
 }
 ContactResultsRemove::~ContactResultsRemove() = default;
@@ -73,21 +71,14 @@ ContactResultsRemove::~ContactResultsRemove() = default;
 ContactResultsVisbility::ContactResultsVisbility(std::shared_ptr<const ComponentInfo> component_info,
                                                  boost::uuids::uuid uuid,
                                                  bool visible)
-  : ComponentEventVisibility(std::move(component_info),
-                             uuid,
-                             visible,
-                             QEvent::Type(EventType::CONTACT_RESULTS_VISIBILITY))
+  : ComponentEventVisibility(std::move(component_info), uuid, visible, kType)
 {
 }
 ContactResultsVisbility::ContactResultsVisbility(std::shared_ptr<const ComponentInfo> component_info,
                                                  boost::uuids::uuid uuid,
                                                  boost::uuids::uuid child_uuid,
                                                  bool visible)
-  : ComponentEventVisibility(std::move(component_info),
-                             uuid,
-                             child_uuid,
-                             visible,
-                             QEvent::Type(EventType::CONTACT_RESULTS_VISIBILITY))
+  : ComponentEventVisibility(std::move(component_info), uuid, child_uuid, visible, kType)
 {
 }
 ContactResultsVisbility::~ContactResultsVisbility() = default;
@@ -96,9 +87,7 @@ ContactResultsVisbility::~ContactResultsVisbility() = default;
 
 ContactResultsVisbilityAll::ContactResultsVisbilityAll(std::shared_ptr<const ComponentInfo> component_info,
                                                        bool visible)
-  : ComponentEventVisibilityAll(std::move(component_info),
-                                visible,
-                                QEvent::Type(EventType::CONTACT_RESULTS_VISIBILITY_ALL))
+  : ComponentEventVisibilityAll(std::move(component_info), visible, kType)
 {
 }
 
@@ -107,14 +96,12 @@ ContactResultsVisbilityAll::~ContactResultsVisbilityAll() = default;
 //////////////////////////////////////////
 
 ContactResultsCompute::ContactResultsCompute(std::shared_ptr<const ComponentInfo> component_info,
-                                             tesseract_collision::ContactManagerConfig contact_manager_config,
-                                             tesseract_collision::CollisionCheckConfig collision_check_config,
+                                             tesseract_collision::CollisionCheckConfig config,
                                              StateType state_type,
                                              std::string ns)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::CONTACT_RESULTS_COMPUTE))
+  : ComponentEvent(std::move(component_info), kType)
   , ns_(std::move(ns))
-  , contact_manager_config_(std::move(contact_manager_config))
-  , collision_check_config_(std::move(collision_check_config))
+  , config_(std::move(config))
   , state_type_(std::move(state_type))
 {
 }
@@ -122,14 +109,7 @@ ContactResultsCompute::ContactResultsCompute(std::shared_ptr<const ComponentInfo
 ContactResultsCompute::~ContactResultsCompute() = default;
 
 const std::string& ContactResultsCompute::getNamespace() const { return ns_; }
-const tesseract_collision::ContactManagerConfig& ContactResultsCompute::getContactManagerConfig() const
-{
-  return contact_manager_config_;
-}
-const tesseract_collision::CollisionCheckConfig& ContactResultsCompute::getCollisionCheckConfig() const
-{
-  return collision_check_config_;
-}
+const tesseract_collision::CollisionCheckConfig& ContactResultsCompute::getConfig() const { return config_; }
 ContactResultsCompute::StateType ContactResultsCompute::getStateType() const { return state_type_; }
 
 //////////////////////////////////////////

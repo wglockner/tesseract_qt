@@ -25,8 +25,7 @@
 
 namespace tesseract_gui::events
 {
-StatusMessageShow::StatusMessageShow(QString message, int timeout)
-  : QEvent(QEvent::Type(EventType::APP_STATUS_MESSAGE_SHOW)), message(message), timeout(timeout)
+StatusMessageShow::StatusMessageShow(QString message, int timeout) : QEvent(kType), message(message), timeout(timeout)
 {
 }
 
@@ -34,7 +33,7 @@ StatusMessageShow::~StatusMessageShow() = default;
 
 //////////////////////////////////////////
 
-StatusMessageClear::StatusMessageClear() : QEvent(QEvent::Type(EventType::APP_STATUS_MESSAGE_CLEAR)) {}
+StatusMessageClear::StatusMessageClear() : QEvent(kType) {}
 
 StatusMessageClear::~StatusMessageClear() = default;
 }  // namespace tesseract_gui::events

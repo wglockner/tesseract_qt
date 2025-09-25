@@ -41,6 +41,9 @@ public:
 
   const std::string& getNamespace() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CONTACT_RESULTS_CLEAR);
+
 private:
   std::string ns_;
 };
@@ -56,6 +59,9 @@ public:
   const std::string& getNamespace() const;
   const std::variant<ContactResultVector, ContactResultMap>& getContactResults() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CONTACT_RESULTS_SET);
+
 private:
   std::string ns_;
   std::variant<ContactResultVector, ContactResultMap> contact_results_;
@@ -69,6 +75,9 @@ public:
                        boost::uuids::uuid uuid,
                        boost::uuids::uuid child_uuid);
   ~ContactResultsRemove() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CONTACT_RESULTS_REMOVE);
 };
 
 class ContactResultsVisbility : public ComponentEventVisibility
@@ -80,6 +89,9 @@ public:
                           boost::uuids::uuid child_uuid,
                           bool visible);
   ~ContactResultsVisbility() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CONTACT_RESULTS_VISIBILITY);
 };
 
 class ContactResultsVisbilityAll : public ComponentEventVisibilityAll
@@ -87,6 +99,9 @@ class ContactResultsVisbilityAll : public ComponentEventVisibilityAll
 public:
   ContactResultsVisbilityAll(std::shared_ptr<const ComponentInfo> component_info, bool visible);
   ~ContactResultsVisbilityAll() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CONTACT_RESULTS_VISIBILITY_ALL);
 };
 
 class ContactResultsCompute : public ComponentEvent
@@ -100,21 +115,21 @@ public:
   };
 
   ContactResultsCompute(std::shared_ptr<const ComponentInfo> component_info,
-                        tesseract_collision::ContactManagerConfig contact_manager_config,
-                        tesseract_collision::CollisionCheckConfig collision_check_config,
+                        tesseract_collision::CollisionCheckConfig config,
                         StateType state_type = CURRENT_STATE,
                         std::string ns = "");
   ~ContactResultsCompute() override;
 
   const std::string& getNamespace() const;
-  const tesseract_collision::ContactManagerConfig& getContactManagerConfig() const;
-  const tesseract_collision::CollisionCheckConfig& getCollisionCheckConfig() const;
+  const tesseract_collision::CollisionCheckConfig& getConfig() const;
   StateType getStateType() const;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CONTACT_RESULTS_COMPUTE);
 
 private:
   std::string ns_;
-  tesseract_collision::ContactManagerConfig contact_manager_config_;
-  tesseract_collision::CollisionCheckConfig collision_check_config_;
+  tesseract_collision::CollisionCheckConfig config_;
   StateType state_type_;
 };
 

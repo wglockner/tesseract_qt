@@ -46,42 +46,42 @@ ContactResultsRenderManager::~ContactResultsRenderManager() = default;
 bool ContactResultsRenderManager::eventFilter(QObject* obj, QEvent* event)
 {
   std::scoped_lock lock(mutex_);
-  if (event->type() == events::EventType::CONTACT_RESULTS_CLEAR)
+  if (event->type() == events::ContactResultsClear::kType)
   {
     assert(dynamic_cast<events::ContactResultsClear*>(event) != nullptr);
     auto* e = static_cast<events::ContactResultsClear*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::ContactResultsClear>(*e));
   }
-  else if (event->type() == events::EventType::CONTACT_RESULTS_SET)
+  else if (event->type() == events::ContactResultsSet::kType)
   {
     assert(dynamic_cast<events::ContactResultsSet*>(event) != nullptr);
     auto* e = static_cast<events::ContactResultsSet*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::ContactResultsSet>(*e));
   }
-  else if (event->type() == events::EventType::CONTACT_RESULTS_REMOVE)
+  else if (event->type() == events::ContactResultsRemove::kType)
   {
     assert(dynamic_cast<events::ContactResultsRemove*>(event) != nullptr);
     auto* e = static_cast<events::ContactResultsRemove*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::ContactResultsRemove>(*e));
   }
-  else if (event->type() == events::EventType::CONTACT_RESULTS_VISIBILITY)
+  else if (event->type() == events::ContactResultsVisbility::kType)
   {
     assert(dynamic_cast<events::ContactResultsVisbility*>(event) != nullptr);
     auto* e = static_cast<events::ContactResultsVisbility*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::ContactResultsVisbility>(*e));
   }
-  else if (event->type() == events::EventType::CONTACT_RESULTS_VISIBILITY_ALL)
+  else if (event->type() == events::ContactResultsVisbilityAll::kType)
   {
     assert(dynamic_cast<events::ContactResultsVisbilityAll*>(event) != nullptr);
     auto* e = static_cast<events::ContactResultsVisbilityAll*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::ContactResultsVisbilityAll>(*e));
   }
-  else if (event->type() == events::EventType::PRE_RENDER)
+  else if (event->type() == events::PreRender::kType)
   {
     assert(dynamic_cast<events::PreRender*>(event) != nullptr);
     if (static_cast<events::PreRender*>(event)->getSceneName() == component_info_->getSceneName())

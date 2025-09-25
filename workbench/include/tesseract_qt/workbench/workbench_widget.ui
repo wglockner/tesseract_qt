@@ -38,7 +38,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="environment_tab">
       <property name="sizePolicy">
@@ -64,14 +64,7 @@
         <number>3</number>
        </property>
        <item>
-        <widget class="tesseract_gui::EnvironmentWidget" name="environment_widget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="tesseract_gui::EnvironmentWidget" name="environment_widget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -99,14 +92,7 @@
         <number>3</number>
        </property>
        <item>
-        <widget class="tesseract_gui::EnvironmentWidget" name="jt_environment_widget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="tesseract_gui::EnvironmentWidget" name="jt_environment_widget" native="true"/>
        </item>
        <item>
         <widget class="Line" name="line">
@@ -116,14 +102,7 @@
         </widget>
        </item>
        <item>
-        <widget class="tesseract_gui::JointTrajectoryWidget" name="joint_trajectory_widget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="tesseract_gui::JointTrajectoryWidget" name="joint_trajectory_widget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -151,14 +130,7 @@
         <number>3</number>
        </property>
        <item>
-        <widget class="tesseract_gui::ManipulationWidget" name="manipulation_widget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="tesseract_gui::ManipulationWidget" name="manipulation_widget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -186,14 +158,7 @@
         <number>3</number>
        </property>
        <item>
-        <widget class="tesseract_gui::TaskComposerWidget" name="task_composer_widget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="tesseract_gui::TaskComposerWidget" name="task_composer_widget" native="true"/>
        </item>
       </layout>
      </widget>

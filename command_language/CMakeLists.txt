@@ -18,7 +18,6 @@ add_library(
   src/models/null_instruction_standard_item.cpp
   src/models/move_instruction_standard_item.cpp
   src/models/set_analog_instruction_standard_item.cpp
-  src/models/set_digital_instruction_standard_item.cpp
   src/models/set_tool_instruction_standard_item.cpp
   src/models/timer_instruction_standard_item.cpp
   src/models/wait_instruction_standard_item.cpp
@@ -71,4 +70,4 @@ list(
   ${PROJECT_NAME}_command_language_models
   ${PROJECT_NAME}_command_language_widgets)
 set(PROJECT_TARGETS ${PROJECT_TARGETS} PARENT_SCOPE)
-install_targets(TARGETS ${PROJECT_NAME}_command_language_models ${PROJECT_NAME}_command_language_widgets)
+

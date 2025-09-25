@@ -31,7 +31,6 @@
 #include <tesseract_qt/common/events/group_tcps_events.h>
 #include <tesseract_qt/common/events/kinematic_groups_events.h>
 #include <tesseract_qt/common/events/environment_events.h>
-#include <tesseract_qt/common/events/status_log_events.h>
 
 #include <tesseract_collision/core/discrete_contact_manager.h>
 
@@ -50,7 +49,9 @@
 
 #include <tesseract_collision/core/common.h>
 #include <tesseract_common/yaml_utils.h>
-#include <tesseract_common/yaml_extensions.h>
+#include <tesseract_common/yaml_extenstions.h>
+
+#include <console_bridge/console.h>
 
 #include <QApplication>
 
@@ -146,9 +147,7 @@ void tesseractEventFilterHelper(const tesseract_environment::Event& event,
             // LCOV_EXCL_START
             default:
             {
-              tesseract_gui::events::StatusLogInfo event("Tesseract Qt Environment Wrapper, Unhandled environment "
-                                                         "command");
-              QApplication::sendEvent(qApp, &event);
+              CONSOLE_BRIDGE_logError("Tesseract Qt Environment Wrapper, Unhandled environment command");
             }
           }
         }
@@ -173,7 +172,7 @@ void eventFilterHelper(QObject* /*obj*/,
                        const std::shared_ptr<const tesseract_gui::ComponentInfo>& component_info,
                        tesseract_environment::Environment& env)
 {
-  if (event->type() == tesseract_gui::events::EventType::CONTACT_RESULTS_COMPUTE)
+  if (event->type() == tesseract_gui::events::ContactResultsCompute::kType)
   {
     assert(dynamic_cast<tesseract_gui::events::ContactResultsCompute*>(event) != nullptr);
     auto* e = static_cast<tesseract_gui::events::ContactResultsCompute*>(event);
@@ -191,8 +190,8 @@ void eventFilterHelper(QObject* /*obj*/,
           applyDefaultContactManager(env);
           contact_manager = env.getDiscreteContactManager();
         }
-        contact_manager->applyContactManagerConfig(e->getContactManagerConfig());
-        contact_manager->contactTest(contacts, e->getCollisionCheckConfig().contact_request);
+        contact_manager->applyContactManagerConfig(e->getConfig().contact_manager_config);
+        contact_manager->contactTest(contacts, e->getConfig().contact_request);
         break;
       }
       case tesseract_gui::events::ContactResultsCompute::StateType::NAMED_STATE:
@@ -219,7 +218,7 @@ void eventFilterHelper(QObject* /*obj*/,
     tesseract_gui::events::ContactResultsSet event(component_info, tracked_object, e->getNamespace());
     QApplication::sendEvent(qApp, &event);
   }
-  else if (event->type() == tesseract_gui::events::EventType::ACM_GENERATE)
+  else if (event->type() == tesseract_gui::events::AllowedCollisionMatrixGenerate::kType)
   {
     assert(dynamic_cast<tesseract_gui::events::AllowedCollisionMatrixGenerate*>(event) != nullptr);
     auto* e = static_cast<tesseract_gui::events::AllowedCollisionMatrixGenerate*>(event);
@@ -286,7 +285,7 @@ void eventFilterHelper(QObject* /*obj*/,
     tesseract_gui::events::AllowedCollisionMatrixSet event(component_info, acm);
     QApplication::sendEvent(qApp, &event);
   }
-  else if (event->type() == tesseract_gui::events::EventType::ENVIRONMENT_APPLY_COMMANDS)
+  else if (event->type() == tesseract_gui::events::EnvironmentApplyCommand::kType)
   {
     assert(dynamic_cast<tesseract_gui::events::EnvironmentApplyCommand*>(event) != nullptr);
     auto* e = static_cast<tesseract_gui::events::EnvironmentApplyCommand*>(event);

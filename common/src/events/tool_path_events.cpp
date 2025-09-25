@@ -37,8 +37,7 @@ public:
 };
 
 ToolPathAdd::ToolPathAdd(std::shared_ptr<const ComponentInfo> component_info, const ToolPath& tool_path)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_ADD))
-  , data_(std::make_unique<Implementation>())
+  : ComponentEvent(std::move(component_info), kType), data_(std::make_unique<Implementation>())
 {
   data_->tool_path = tool_path;
 }
@@ -56,8 +55,7 @@ public:
 };
 
 ToolPathRemove::ToolPathRemove(std::shared_ptr<const ComponentInfo> component_info, const boost::uuids::uuid& uuid)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_REMOVE))
-  , data_(std::make_unique<Implementation>())
+  : ComponentEvent(std::move(component_info), kType), data_(std::make_unique<Implementation>())
 {
   data_->uuid = uuid;
 }
@@ -71,14 +69,14 @@ const boost::uuids::uuid& ToolPathRemove::getUUID() const { return data_->uuid; 
 //////////////////////////////////////////
 
 ToolPathRemoveAll::ToolPathRemoveAll(std::shared_ptr<const ComponentInfo> component_info)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_REMOVE_ALL))
+  : ComponentEvent(std::move(component_info), kType)
 {
 }
 ToolPathRemoveAll::ToolPathRemoveAll(const ToolPathRemoveAll& other) : ToolPathRemoveAll(other.getComponentInfo()) {}
 ToolPathRemoveAll::~ToolPathRemoveAll() = default;
 
 ToolPathRemoveSelected::ToolPathRemoveSelected(std::shared_ptr<const ComponentInfo> component_info)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_REMOVE_SELECTED))
+  : ComponentEvent(std::move(component_info), kType)
 {
 }
 ToolPathRemoveSelected::~ToolPathRemoveSelected() = default;
@@ -93,8 +91,7 @@ public:
 };
 
 ToolPathHide::ToolPathHide(std::shared_ptr<const ComponentInfo> component_info, const boost::uuids::uuid& uuid)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_HIDE))
-  , data_(std::make_unique<Implementation>())
+  : ComponentEvent(std::move(component_info), kType), data_(std::make_unique<Implementation>())
 {
   data_->uuid = uuid;
 }
@@ -102,8 +99,7 @@ ToolPathHide::ToolPathHide(std::shared_ptr<const ComponentInfo> component_info, 
 ToolPathHide::ToolPathHide(std::shared_ptr<const ComponentInfo> component_info,
                            const boost::uuids::uuid& uuid,
                            const boost::uuids::uuid& child_uuid)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_HIDE))
-  , data_(std::make_unique<Implementation>())
+  : ComponentEvent(std::move(component_info), kType), data_(std::make_unique<Implementation>())
 {
   data_->uuid = uuid;
   data_->child_uuid = child_uuid;
@@ -120,7 +116,7 @@ const boost::uuids::uuid& ToolPathHide::getChildUUID() const { return data_->chi
 //////////////////////////////////////////
 
 ToolPathHideAll::ToolPathHideAll(std::shared_ptr<const ComponentInfo> component_info)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_HIDE_ALL))
+  : ComponentEvent(std::move(component_info), kType)
 {
 }
 ToolPathHideAll::ToolPathHideAll(const ToolPathHideAll& other) : ToolPathHideAll(other.getComponentInfo()) {}
@@ -136,8 +132,7 @@ public:
 };
 
 ToolPathShow::ToolPathShow(std::shared_ptr<const ComponentInfo> component_info, const boost::uuids::uuid& uuid)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_SHOW))
-  , data_(std::make_unique<Implementation>())
+  : ComponentEvent(std::move(component_info), kType), data_(std::make_unique<Implementation>())
 {
   data_->uuid = uuid;
 }
@@ -145,8 +140,7 @@ ToolPathShow::ToolPathShow(std::shared_ptr<const ComponentInfo> component_info, 
 ToolPathShow::ToolPathShow(std::shared_ptr<const ComponentInfo> component_info,
                            const boost::uuids::uuid& uuid,
                            const boost::uuids::uuid& child_uuid)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_SHOW))
-  , data_(std::make_unique<Implementation>())
+  : ComponentEvent(std::move(component_info), kType), data_(std::make_unique<Implementation>())
 {
   data_->uuid = uuid;
   data_->child_uuid = child_uuid;
@@ -163,7 +157,7 @@ const boost::uuids::uuid& ToolPathShow::getChildUUID() const { return data_->chi
 //////////////////////////////////////////
 
 ToolPathShowAll::ToolPathShowAll(std::shared_ptr<const ComponentInfo> component_info)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_SHOW_ALL))
+  : ComponentEvent(std::move(component_info), kType)
 {
 }
 ToolPathShowAll::ToolPathShowAll(const ToolPathShowAll& other) : ToolPathShowAll(other.getComponentInfo()) {}
@@ -172,7 +166,7 @@ ToolPathShowAll::~ToolPathShowAll() = default;
 //////////////////////////////////////////
 
 ToolPathOpen::ToolPathOpen(std::shared_ptr<const ComponentInfo> component_info)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_OPEN))
+  : ComponentEvent(std::move(component_info), kType)
 {
 }
 ToolPathOpen::ToolPathOpen(const ToolPathOpen& other) : ToolPathOpen(other.getComponentInfo()) {}
@@ -181,7 +175,7 @@ ToolPathOpen::~ToolPathOpen() = default;
 //////////////////////////////////////////
 
 ToolPathSave::ToolPathSave(std::shared_ptr<const ComponentInfo> component_info)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TOOL_PATH_SAVE))
+  : ComponentEvent(std::move(component_info), kType)
 {
 }
 ToolPathSave::ToolPathSave(const ToolPathSave& other) : ToolPathSave(other.getComponentInfo()) {}

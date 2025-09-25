@@ -22,14 +22,12 @@
  */
 
 #include <tesseract_qt/common/events/task_composer_events.h>
-#include <tesseract_common/profile_dictionary.h>
 
 namespace tesseract_gui::events
 {
 TaskComposerLoadConfig::TaskComposerLoadConfig(std::shared_ptr<const ComponentInfo> component_info,
                                                std::string resource_path)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TASK_COMPOSER_LOAD_CONFIG))
-  , resource_path_(std::move(resource_path))
+  : ComponentEvent(std::move(component_info), kType), resource_path_(std::move(resource_path))
 {
 }
 
@@ -41,9 +39,7 @@ const std::string& TaskComposerLoadConfig::getResourcePath() const { return reso
 TaskComposerLoadLog::TaskComposerLoadLog(std::shared_ptr<const ComponentInfo> component_info,
                                          std::string resource_path,
                                          std::string ns)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TASK_COMPOSER_LOAD_LOG))
-  , resource_path_(std::move(resource_path))
-  , ns_(std::move(ns))
+  : ComponentEvent(std::move(component_info), kType), resource_path_(std::move(resource_path)), ns_(std::move(ns))
 {
 }
 
@@ -53,24 +49,8 @@ const std::string& TaskComposerLoadLog::getNamespace() const { return ns_; }
 
 //////////////////////////////////////////////////////
 
-TaskComposerAddLog::TaskComposerAddLog(std::shared_ptr<const ComponentInfo> component_info,
-                                       tesseract_planning::TaskComposerLog log,
-                                       std::string ns)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TASK_COMPOSER_ADD_LOG))
-  , log_(std::move(log))
-  , ns_(std::move(ns))
-{
-}
-TaskComposerAddLog::~TaskComposerAddLog() = default;
-
-const tesseract_planning::TaskComposerLog& TaskComposerAddLog::getLog() const { return log_; }
-const std::string& TaskComposerAddLog::getNamespace() const { return ns_; }
-
-//////////////////////////////////////////////////////
-
 TaskComposerSaveLog::TaskComposerSaveLog(std::shared_ptr<const ComponentInfo> component_info, std::string save_path)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TASK_COMPOSER_SAVE_LOG))
-  , save_path_(std::move(save_path))
+  : ComponentEvent(std::move(component_info), kType), save_path_(std::move(save_path))
 {
 }
 
@@ -80,7 +60,7 @@ const std::string& TaskComposerSaveLog::getSavePath() const { return save_path_;
 //////////////////////////////////////////////////////
 
 TaskComposerPlotDotgraph::TaskComposerPlotDotgraph(std::shared_ptr<const ComponentInfo> component_info)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TASK_COMPOSER_PLOT_DOTGRAPH))
+  : ComponentEvent(std::move(component_info), kType)
 {
 }
 
@@ -89,12 +69,14 @@ TaskComposerPlotDotgraph::~TaskComposerPlotDotgraph() = default;
 //////////////////////////////////////////////////////
 
 TaskComposerSetProfiles::TaskComposerSetProfiles(std::shared_ptr<const ComponentInfo> component_info,
-                                                 std::shared_ptr<tesseract_common::ProfileDictionary> profiles)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::TASK_COMPOSER_SET_PROFILES))
-  , profiles_(std::move(profiles))
+                                                 std::shared_ptr<tesseract_planning::ProfileDictionary> profiles)
+  : ComponentEvent(std::move(component_info), kType), profiles_(std::move(profiles))
 {
 }
 
 TaskComposerSetProfiles::~TaskComposerSetProfiles() = default;
-std::shared_ptr<tesseract_common::ProfileDictionary> TaskComposerSetProfiles::getProfiles() const { return profiles_; }
+std::shared_ptr<tesseract_planning::ProfileDictionary> TaskComposerSetProfiles::getProfiles() const
+{
+  return profiles_;
+}
 }  // namespace tesseract_gui::events

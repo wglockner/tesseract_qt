@@ -46,6 +46,7 @@ namespace tesseract_gui
 struct ToolPathWidget::Implementation
 {
   std::shared_ptr<ToolPathModel> model;
+  std::shared_ptr<ToolPathSelectionModel> selection_model;
   QVBoxLayout* layout;
   TreeView* tree_view;
 
@@ -61,17 +62,14 @@ ToolPathWidget::ToolPathWidget(QWidget* parent) : ToolPathWidget(nullptr, parent
 ToolPathWidget::ToolPathWidget(std::shared_ptr<const ComponentInfo> component_info, QWidget* parent)
   : QWidget(parent), data_(std::make_unique<Implementation>())
 {
-  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
   // Create model
   data_->model = std::make_shared<ToolPathModel>(component_info);
+  data_->selection_model = std::make_shared<ToolPathSelectionModel>(data_->model.get(), component_info);
 
   // Create tree widget
   data_->tree_view = new TreeView();
   data_->tree_view->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers);
-  data_->tree_view->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   data_->tree_view->setModel(data_->model.get());
-  data_->tree_view->setSelectionModel(new ToolPathSelectionModel(data_->model.get(), component_info));
 
   // Create layout
   data_->layout = new QVBoxLayout();
@@ -110,9 +108,10 @@ void ToolPathWidget::setComponentInfo(std::shared_ptr<const ComponentInfo> compo
 {
   // Create model
   data_->model = std::make_shared<ToolPathModel>(component_info);
+  data_->selection_model = std::make_shared<ToolPathSelectionModel>(data_->model.get(), component_info);
 
   data_->tree_view->setModel(data_->model.get());
-  data_->tree_view->setSelectionModel(new ToolPathSelectionModel(data_->model.get(), component_info));
+  data_->tree_view->setSelectionModel(data_->selection_model.get());
 
   data_->open_dialog->setComponentInfo(component_info);
   data_->save_dialog->setComponentInfo(component_info);
@@ -137,7 +136,7 @@ const QItemSelectionModel& ToolPathWidget::getSelectionModel() const { return *d
 // Documentation inherited
 bool ToolPathWidget::eventFilter(QObject* obj, QEvent* event)
 {
-  if (event->type() == events::EventType::TOOL_PATH_OPEN)
+  if (event->type() == events::ToolPathOpen::kType)
   {
     assert(dynamic_cast<events::ToolPathOpen*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathOpen*>(event);
@@ -148,7 +147,7 @@ bool ToolPathWidget::eventFilter(QObject* obj, QEvent* event)
       data_->open_dialog->activateWindow();
     }
   }
-  else if (event->type() == events::EventType::TOOL_PATH_SAVE)
+  else if (event->type() == events::ToolPathSave::kType)
   {
     assert(dynamic_cast<events::ToolPathSave*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathSave*>(event);

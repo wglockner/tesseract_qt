@@ -269,14 +269,14 @@ bool AllowedCollisionMatrixModel::setData(const QModelIndex& index, const QVaria
 
 bool AllowedCollisionMatrixModel::eventFilter(QObject* obj, QEvent* event)
 {
-  if (event->type() == events::EventType::ACM_SET)
+  if (event->type() == events::AllowedCollisionMatrixSet::kType)
   {
     assert(dynamic_cast<events::AllowedCollisionMatrixSet*>(event) != nullptr);
     auto* e = static_cast<events::AllowedCollisionMatrixSet*>(event);
     if (e->getComponentInfo() == data_->component_info)
       set(e->getACM());
   }
-  else if (event->type() == events::EventType::ACM_ADD)
+  else if (event->type() == events::AllowedCollisionMatrixAdd::kType)
   {
     assert(dynamic_cast<events::AllowedCollisionMatrixAdd*>(event) != nullptr);
     auto* e = static_cast<events::AllowedCollisionMatrixAdd*>(event);
@@ -286,14 +286,14 @@ bool AllowedCollisionMatrixModel::eventFilter(QObject* obj, QEvent* event)
         add(entry[0], entry[1], entry[2]);
     }
   }
-  else if (event->type() == events::EventType::ACM_CLEAR)
+  else if (event->type() == events::AllowedCollisionMatrixClear::kType)
   {
     assert(dynamic_cast<events::AllowedCollisionMatrixClear*>(event) != nullptr);
     auto* e = static_cast<events::AllowedCollisionMatrixClear*>(event);
     if (e->getComponentInfo() == data_->component_info)
       clear();
   }
-  else if (event->type() == events::EventType::ACM_REMOVE)
+  else if (event->type() == events::AllowedCollisionMatrixRemove::kType)
   {
     assert(dynamic_cast<events::AllowedCollisionMatrixRemove*>(event) != nullptr);
     auto* e = static_cast<events::AllowedCollisionMatrixRemove*>(event);
@@ -303,7 +303,7 @@ bool AllowedCollisionMatrixModel::eventFilter(QObject* obj, QEvent* event)
         remove(entry[0], entry[1]);
     }
   }
-  else if (event->type() == events::EventType::ACM_REMOVE_LINK)
+  else if (event->type() == events::AllowedCollisionMatrixRemoveLink::kType)
   {
     assert(dynamic_cast<events::AllowedCollisionMatrixRemoveLink*>(event) != nullptr);
     auto* e = static_cast<events::AllowedCollisionMatrixRemoveLink*>(event);

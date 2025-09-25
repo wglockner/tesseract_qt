@@ -64,4 +64,4 @@ list(
   ${PROJECT_NAME}_tool_path_models
   ${PROJECT_NAME}_tool_path_widgets)
 set(PROJECT_TARGETS ${PROJECT_TARGETS} PARENT_SCOPE)
-install_targets(TARGETS ${PROJECT_NAME}_tool_path_models ${PROJECT_NAME}_tool_path_widgets)
+

@@ -22,7 +22,6 @@
  */
 #include <tesseract_qt/environment/models/commands/change_collision_margins_command_standard_item.h>
 #include <tesseract_qt/common/models/collision_margin_data_standard_item.h>
-#include <tesseract_qt/common/models/pairs_collision_margin_data_standard_item.h>
 #include <tesseract_qt/common/models/standard_item_utils.h>
 #include <tesseract_qt/common/models/standard_item_type.h>
 #include <tesseract_qt/common/icon_utils.h>
@@ -62,32 +61,41 @@ int ChangeCollisionMarginsCommandStandardItem::type() const
 
 void ChangeCollisionMarginsCommandStandardItem::ctor()
 {
-  if (command->getDefaultCollisionMargin().has_value())
-    appendRow(createStandardItemFloat("Default Margin", command->getDefaultCollisionMargin().value()));
-  else
-    appendRow(createStandardItemString("Default Margin", "nullopt"));
-
-  appendRow(createStandardItemFloat("Max Margin", command->getCollisionMarginPairData().getMaxCollisionMargin()));
-
-  switch (command->getCollisionMarginPairOverrideType())
+  switch (command->getCollisionMarginOverrideType())
   {
-    case tesseract_common::CollisionMarginPairOverrideType::NONE:
+    case tesseract_common::CollisionMarginOverrideType::NONE:
     {
-      appendRow(createStandardItemString("Override pair type", "NONE"));
+      appendRow(createStandardItemString("Override type", "NONE"));
       break;
     }
-    case tesseract_common::CollisionMarginPairOverrideType::REPLACE:
+    case tesseract_common::CollisionMarginOverrideType::REPLACE:
     {
-      appendRow(createStandardItemString("Override pair type", "REPLACE"));
+      appendRow(createStandardItemString("Override type", "REPLACE"));
       break;
     }
-    case tesseract_common::CollisionMarginPairOverrideType::MODIFY:
+    case tesseract_common::CollisionMarginOverrideType::MODIFY:
     {
-      appendRow(createStandardItemString("Override pair type", "MODIFY"));
+      appendRow(createStandardItemString("Override type", "MODIFY"));
+      break;
+    }
+    case tesseract_common::CollisionMarginOverrideType::OVERRIDE_DEFAULT_MARGIN:
+    {
+      appendRow(createStandardItemString("Override type", "OVERRIDE_DEFAULT_MARGIN"));
+      break;
+    }
+    case tesseract_common::CollisionMarginOverrideType::OVERRIDE_PAIR_MARGIN:
+    {
+      appendRow(createStandardItemString("Override type", "OVERRIDE_PAIR_MARGIN"));
+      break;
+    }
+    case tesseract_common::CollisionMarginOverrideType::MODIFY_PAIR_MARGIN:
+    {
+      appendRow(createStandardItemString("Override type", "MODIFY_PAIR_MARGIN"));
       break;
     }
   }
 
-  appendRow(new PairsCollisionMarginDataStandardItem(command->getCollisionMarginPairData().getCollisionMargins()));
+  auto* cmd_item = new CollisionMarginDataStandardItem(command->getCollisionMarginData());
+  appendRow({ cmd_item, new QStandardItem() });
 }
 }  // namespace tesseract_gui

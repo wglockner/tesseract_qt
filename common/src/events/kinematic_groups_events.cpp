@@ -25,7 +25,7 @@
 namespace tesseract_gui::events
 {
 KinematicGroupsClear::KinematicGroupsClear(std::shared_ptr<const ComponentInfo> component_info)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::KINEMATIC_GROUPS_CLEAR))
+  : ComponentEvent(std::move(component_info), kType)
 {
 }
 
@@ -37,7 +37,7 @@ KinematicGroupsSet::KinematicGroupsSet(std::shared_ptr<const ComponentInfo> comp
                                        const tesseract_srdf::ChainGroups& chain_groups,
                                        const tesseract_srdf::JointGroups& joint_groups,
                                        const tesseract_srdf::LinkGroups& link_groups)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::KINEMATIC_GROUPS_SET))
+  : ComponentEvent(std::move(component_info), kType)
   , chain_groups_(chain_groups)
   , joint_groups_(joint_groups)
   , link_groups_(link_groups)
@@ -55,9 +55,7 @@ const tesseract_srdf::LinkGroups& KinematicGroupsSet::getLinkGroups() const { re
 KinematicGroupsAddChain::KinematicGroupsAddChain(std::shared_ptr<const ComponentInfo> component_info,
                                                  std::string group_name,
                                                  tesseract_srdf::ChainGroup group)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::KINEMATIC_GROUPS_ADD_CHAIN))
-  , group_name_(std::move(group_name))
-  , group_(std::move(group))
+  : ComponentEvent(std::move(component_info), kType), group_name_(std::move(group_name)), group_(std::move(group))
 {
 }
 
@@ -71,9 +69,7 @@ const tesseract_srdf::ChainGroup& KinematicGroupsAddChain::getGroup() const { re
 KinematicGroupsAddJoint::KinematicGroupsAddJoint(std::shared_ptr<const ComponentInfo> component_info,
                                                  std::string group_name,
                                                  tesseract_srdf::JointGroup group)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::KINEMATIC_GROUPS_ADD_JOINT))
-  , group_name_(std::move(group_name))
-  , group_(std::move(group))
+  : ComponentEvent(std::move(component_info), kType), group_name_(std::move(group_name)), group_(std::move(group))
 {
 }
 
@@ -87,9 +83,7 @@ const tesseract_srdf::JointGroup& KinematicGroupsAddJoint::getGroup() const { re
 KinematicGroupsAddLink::KinematicGroupsAddLink(std::shared_ptr<const ComponentInfo> component_info,
                                                std::string group_name,
                                                tesseract_srdf::LinkGroup group)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::KINEMATIC_GROUPS_ADD_LINK))
-  , group_name_(std::move(group_name))
-  , group_(std::move(group))
+  : ComponentEvent(std::move(component_info), kType), group_name_(std::move(group_name)), group_(std::move(group))
 {
 }
 
@@ -102,8 +96,7 @@ const tesseract_srdf::LinkGroup& KinematicGroupsAddLink::getGroup() const { retu
 
 KinematicGroupsRemove::KinematicGroupsRemove(std::shared_ptr<const ComponentInfo> component_info,
                                              const std::vector<std::string>& group_names)
-  : ComponentEvent(std::move(component_info), QEvent::Type(EventType::KINEMATIC_GROUPS_REMOVE))
-  , group_names_(group_names)
+  : ComponentEvent(std::move(component_info), kType), group_names_(group_names)
 {
 }
 

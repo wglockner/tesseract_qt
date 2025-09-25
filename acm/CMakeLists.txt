@@ -63,4 +63,4 @@ list(
   ${PROJECT_NAME}_acm_models
   ${PROJECT_NAME}_acm_widgets)
 set(PROJECT_TARGETS ${PROJECT_TARGETS} PARENT_SCOPE)
-install_targets(TARGETS ${PROJECT_NAME}_acm_models ${PROJECT_NAME}_acm_widgets)
+

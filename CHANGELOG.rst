@@ -2,38 +2,6 @@
 Changelog for package tesseract_qt
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.31.0 (2025-07-06)
--------------------
-* Fix yaml extensions file name spelling
-* Fix task composer widget not populating dotgraph if requested (`#174 <https://github.com/tesseract-robotics/tesseract_qt/issues/174>`_)
-* Update manipulation widget to be more compact
-* Improve task composer widget usage
-* Fix double delete issue in tool path widget
-* Add setter and getter for component info in tool path toolbar
-* Add TaskComposerAddLog Event
-* Add missing quotes in both linux and windows cmake depends variable
-* Updated QStandardItem status log icon based on severity
-* Add collapsible group box widget
-* Fix StatusLogModel double free in StatusLogWidget
-* Update task composer widget to leverage status log
-* Check if component info is null in the workbench widget constructor
-* Enable status log message wrapping
-* Simplify status log event names
-* Improve widget sizing to provide the smallest footprint
-* Add status log widget (`#158 <https://github.com/tesseract-robotics/tesseract_qt/issues/158>`_)
-* Refactoring event types to leverage QEvent::registerEventType
-* Contributors: David Spielman, Levi Armstrong
-
-0.30.0 (2025-04-23)
--------------------
-* Move profile dictionary to tesseract_common
-* Update clang_format CI to use 22.04 image
-* Update cmake format CI to 22.04 image
-* Update to leverage boost_plugin_loader
-* Update because of changes with collision margin data
-* Updated task composer menu to only be enabled for composite instruction items
-* Contributors: Levi Armstrong, Michael Ripperger
-
 0.29.1 (2025-03-26)
 -------------------
 * Fix ComponentInfoDialog not updating model

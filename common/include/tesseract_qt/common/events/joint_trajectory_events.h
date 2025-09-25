@@ -55,6 +55,9 @@ public:
 
   bool clearNamespace() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_ADD);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -68,6 +71,9 @@ public:
   JointTrajectoryRemove(std::shared_ptr<const ComponentInfo> component_info, const boost::uuids::uuid& uuid);
   JointTrajectoryRemove(const JointTrajectoryRemove& other);
   ~JointTrajectoryRemove() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_REMOVE);
 };
 
 /** @brief Event called to remove all a joint trajectories under a given namespace for a given scene */
@@ -80,6 +86,9 @@ public:
 
   const std::string& getNamespace() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_REMOVE_NAMESPACE);
+
 private:
   std::string ns_;
 };
@@ -91,6 +100,9 @@ public:
   JointTrajectoryRemoveAll(std::shared_ptr<const ComponentInfo> component_info);
   JointTrajectoryRemoveAll(const JointTrajectoryRemoveAll& other);
   ~JointTrajectoryRemoveAll() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_REMOVE_ALL);
 };
 
 /** @brief Event called to remove selected joint trajectories for a given scene */
@@ -100,6 +112,9 @@ public:
   JointTrajectoryRemoveSelected(std::shared_ptr<const ComponentInfo> component_info);
   JointTrajectoryRemoveSelected(const JointTrajectoryRemoveSelected& other);
   ~JointTrajectoryRemoveSelected() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_REMOVE_SELECTED);
 };
 
 /** @brief Event called to open a joint trajectories for a given scene */
@@ -109,6 +124,9 @@ public:
   JointTrajectoryOpen(std::shared_ptr<const ComponentInfo> component_info);
   JointTrajectoryOpen(const JointTrajectoryOpen& other);
   ~JointTrajectoryOpen() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_OPEN);
 };
 
 /** @brief Event called to save a joint trajectories for a given scene */
@@ -118,6 +136,9 @@ public:
   JointTrajectorySave(std::shared_ptr<const ComponentInfo> component_info);
   JointTrajectorySave(const JointTrajectorySave& other);
   ~JointTrajectorySave() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_SAVE);
 };
 
 /** @brief Event called to save a joint trajectories for a given scene */
@@ -127,6 +148,9 @@ public:
   JointTrajectoryPlot(std::shared_ptr<const ComponentInfo> component_info);
   JointTrajectoryPlot(const JointTrajectoryPlot& other);
   ~JointTrajectoryPlot() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_PLOT);
 };
 
 /** @brief Event called to modify toolbare state */
@@ -142,6 +166,9 @@ public:
   bool open_enabled{ true };
   bool save_enabled{ true };
   bool plot_enabled{ true };
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::JOINT_TRAJECTORY_TOOLBAR_STATE);
 };
 }  // namespace tesseract_gui::events
 #endif  // TESSERACT_QT_COMMON_JOINT_TRAJECTORY_EVENTS_H

@@ -37,6 +37,9 @@ class AllowedCollisionMatrixClear : public ComponentEvent
 public:
   AllowedCollisionMatrixClear(std::shared_ptr<const ComponentInfo> component_info);
   ~AllowedCollisionMatrixClear() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::ACM_CLEAR);
 };
 
 class AllowedCollisionMatrixSet : public ComponentEvent
@@ -47,6 +50,9 @@ public:
   ~AllowedCollisionMatrixSet() override;
 
   const tesseract_common::AllowedCollisionMatrix& getACM() const;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::ACM_SET);
 
 private:
   struct Implementation;
@@ -62,6 +68,9 @@ public:
 
   const std::vector<std::array<std::string, 3>>& getEntries() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::ACM_ADD);
+
 private:
   std::vector<std::array<std::string, 3>> entries_;
 };
@@ -74,6 +83,9 @@ public:
   ~AllowedCollisionMatrixRemove() override;
 
   const std::vector<std::array<std::string, 2>>& getEntries() const;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::ACM_REMOVE);
 
 private:
   std::vector<std::array<std::string, 2>> entries_;
@@ -88,6 +100,9 @@ public:
 
   const std::vector<std::string>& getLinkNames() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::ACM_REMOVE_LINK);
+
 private:
   std::vector<std::string> link_names_;
 };
@@ -99,6 +114,9 @@ public:
   ~AllowedCollisionMatrixGenerate() override;
 
   long getResolution() const;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::ACM_GENERATE);
 
 private:
   long resolution_;

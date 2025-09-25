@@ -10,12 +10,6 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -34,14 +28,8 @@
    </property>
    <item>
     <widget class="QToolBox" name="toolBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="load_page">
       <property name="geometry">
@@ -49,14 +37,8 @@
         <x>0</x>
         <y>0</y>
         <width>394</width>
-        <height>139</height>
+        <height>154</height>
        </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
       </property>
       <attribute name="label">
        <string>Load URDF/SRDF</string>
@@ -174,14 +156,8 @@
         <x>0</x>
         <y>0</y>
         <width>394</width>
-        <height>139</height>
+        <height>154</height>
        </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
       </property>
       <attribute name="label">
        <string>Allowed Collision Matrix</string>
@@ -200,14 +176,7 @@
         <number>3</number>
        </property>
        <item>
-        <widget class="tesseract_gui::AllowedCollisionMatrixEditorWidget" name="acm_widget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="tesseract_gui::AllowedCollisionMatrixEditorWidget" name="acm_widget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -217,14 +186,8 @@
         <x>0</x>
         <y>0</y>
         <width>394</width>
-        <height>139</height>
+        <height>154</height>
        </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
       </property>
       <attribute name="label">
        <string>Kinematic Groups</string>
@@ -243,14 +206,7 @@
         <number>3</number>
        </property>
        <item>
-        <widget class="tesseract_gui::KinematicGroupsEditorWidget" name="groups_widget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="tesseract_gui::KinematicGroupsEditorWidget" name="groups_widget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -260,14 +216,8 @@
         <x>0</x>
         <y>0</y>
         <width>394</width>
-        <height>139</height>
+        <height>154</height>
        </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
       </property>
       <attribute name="label">
        <string>Kinematic Group Joint States</string>
@@ -286,14 +236,7 @@
         <number>3</number>
        </property>
        <item>
-        <widget class="tesseract_gui::GroupJointStatesEditorWidget" name="group_states_widget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="tesseract_gui::GroupJointStatesEditorWidget" name="group_states_widget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -303,14 +246,8 @@
         <x>0</x>
         <y>0</y>
         <width>394</width>
-        <height>139</height>
+        <height>154</height>
        </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
       </property>
       <attribute name="label">
        <string>Save</string>

@@ -16,7 +16,6 @@
  */
 #include <tesseract_qt/rendering/gazebo_utils.h>
 #include <tesseract_qt/common/entity_container.h>
-#include <tesseract_qt/common/events/status_log_events.h>
 
 #include <tesseract_common/resource_locator.h>
 #include <tesseract_geometry/geometries.h>
@@ -44,8 +43,7 @@
 #include <gz/rendering/WireBox.hh>
 #include <gz/rendering/AxisVisual.hh>
 #include <gz/rendering/Capsule.hh>
-
-#include <QApplication>
+#include <console_bridge/console.h>
 
 const std::string USER_VISIBILITY = "user_visibility";
 const std::string USER_PARENT_VISIBILITY = "user_parent_visibility";
@@ -58,38 +56,33 @@ std::shared_ptr<gz::rendering::Scene> sceneFromFirstRenderEngine(const std::stri
   auto loaded_eng_names = gz::rendering::loadedEngines();
   if (loaded_eng_names.empty())
   {
-    events::StatusLogInfo event("No rendering engine is loaded yet");
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logDebug("No rendering engine is loaded yet");
     return nullptr;
   }
 
   auto engine_name = loaded_eng_names[0];
   if (loaded_eng_names.size() > 1)
   {
-    events::StatusLogWarn event(QString("More than one engine is available. Using engine %1").arg(engine_name.c_str()));
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logWarn("More than one engine is available. Using engine [%s]", engine_name.c_str());
   }
 
   auto* engine = gz::rendering::engine(engine_name);
   if (engine == nullptr)
   {
-    events::StatusLogError event(QString("Internal error: failed to load engine %1").arg(engine_name.c_str()));
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logError("Internal error: failed to load engine [%s]", engine_name.c_str());
     return nullptr;
   }
 
   if (engine->SceneCount() == 0)
   {
-    events::StatusLogInfo event("No scene has been created yet");
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logDebug("No scene has been created yet");
     return nullptr;
   }
 
   auto scene = engine->SceneByName(scene_name);
   if (scene == nullptr)
   {
-    events::StatusLogError event("Internal error: scene is null.");
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logError("Internal error: scene is null.");
     return nullptr;
   }
 
@@ -103,23 +96,20 @@ std::shared_ptr<gz::rendering::Scene> sceneFromRenderEngine(const std::string& s
   auto* engine = gz::rendering::engine(engine_name);
   if (engine == nullptr)
   {
-    events::StatusLogError event(QString("Internal error: failed to load engine %1").arg(engine_name.c_str()));
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logError("Internal error: failed to load engine [%s]", engine_name.c_str());
     return nullptr;
   }
 
   if (engine->SceneCount() == 0)
   {
-    events::StatusLogInfo event("No scene has been created yet");
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logDebug("No scene has been created yet");
     return nullptr;
   }
 
   auto scene = engine->SceneByName(scene_name);
   if (scene == nullptr)
   {
-    events::StatusLogError event("Internal error: scene is null.");
-    QApplication::sendEvent(qApp, &event);
+    CONSOLE_BRIDGE_logError("Internal error: scene is null.");
     return nullptr;
   }
 
@@ -713,6 +703,8 @@ loadLinkGeometry(gz::rendering::Scene& scene,
     }
     default:
     {
+      //      CONSOLE_BRIDGE_logError("This geometric shape type (%d) is not supported",
+      //                              static_cast<int>(geometry->getType()));
       return nullptr;
     }
   }
@@ -889,8 +881,7 @@ void tesseractEventFilter(const tesseract_environment::Event& event,
             // LCOV_EXCL_START
             default:
             {
-              events::StatusLogError event("Tesseract Qt Gazebo Utils, Unhandled environment command");
-              QApplication::sendEvent(qApp, &event);
+              CONSOLE_BRIDGE_logError("Tesseract Qt Gazebo Utils, Unhandled environment command");
             }
           }
         }
