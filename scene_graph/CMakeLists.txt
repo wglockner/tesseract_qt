@@ -85,4 +85,3 @@ list(
   ${PROJECT_NAME}_scene_graph_models
   ${PROJECT_NAME}_scene_graph_widgets)
 set(PROJECT_TARGETS ${PROJECT_TARGETS} PARENT_SCOPE)
-

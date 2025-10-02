@@ -70,4 +70,3 @@ list(
   ${PROJECT_NAME}_command_language_models
   ${PROJECT_NAME}_command_language_widgets)
 set(PROJECT_TARGETS ${PROJECT_TARGETS} PARENT_SCOPE)
-

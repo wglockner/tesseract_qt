@@ -63,7 +63,7 @@ set(LINUX_DEPENDS
     "libgraphviz-dev"
     "libqwt-qt5-6"
     "${TESSERACT_PACKAGE_PREFIX}tesseract-common"
-    "${TESSERACT_PACKAGE_PREFIX}tesseract-scene-graph"
+    "${TESSERACT_PACKAGE_PREFIX}tesseract-scene-graph
     "${TESSERACT_PACKAGE_PREFIX}tesseract-environment"
     "${TESSERACT_PACKAGE_PREFIX}tesseract-urdf"
     "${TESSERACT_PACKAGE_PREFIX}tesseract-srdf"

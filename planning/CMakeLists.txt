@@ -80,4 +80,3 @@ list(
   ${PROJECT_NAME}_planning
   ${PROJECT_NAME}_planning_widgets)
 set(PROJECT_TARGETS ${PROJECT_TARGETS} PARENT_SCOPE)
-
