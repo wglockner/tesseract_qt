@@ -60,91 +60,91 @@ SceneGraphRenderManager::~SceneGraphRenderManager() = default;
 bool SceneGraphRenderManager::eventFilter(QObject* obj, QEvent* event)
 {
   std::scoped_lock lock(mutex_);
-  if (event->type() == events::EventType::SCENE_GRAPH_CLEAR)
+  if (event->type() == events::SceneGraphClear::kType)
   {
     assert(dynamic_cast<events::SceneGraphClear*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphClear*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphClear>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_SET)
+  else if (event->type() == events::SceneGraphSet::kType)
   {
     assert(dynamic_cast<events::SceneGraphSet*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphSet*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphSet>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_ADD_LINK)
+  else if (event->type() == events::SceneGraphAddLink::kType)
   {
     assert(dynamic_cast<events::SceneGraphAddLink*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphAddLink*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphAddLink>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_ADD_JOINT)
+  else if (event->type() == events::SceneGraphAddJoint::kType)
   {
     assert(dynamic_cast<events::SceneGraphAddJoint*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphAddJoint*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphAddJoint>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_MOVE_LINK)
+  else if (event->type() == events::SceneGraphMoveLink::kType)
   {
     assert(dynamic_cast<events::SceneGraphMoveLink*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphMoveLink*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphMoveLink>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_MOVE_JOINT)
+  else if (event->type() == events::SceneGraphMoveJoint::kType)
   {
     assert(dynamic_cast<events::SceneGraphMoveJoint*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphMoveJoint*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphMoveJoint>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_REMOVE_LINK)
+  else if (event->type() == events::SceneGraphRemoveLink::kType)
   {
     assert(dynamic_cast<events::SceneGraphRemoveLink*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphRemoveLink*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphRemoveLink>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_REMOVE_JOINT)
+  else if (event->type() == events::SceneGraphRemoveJoint::kType)
   {
     assert(dynamic_cast<events::SceneGraphRemoveJoint*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphRemoveJoint*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphRemoveJoint>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_REPLACE_JOINT)
+  else if (event->type() == events::SceneGraphReplaceJoint::kType)
   {
     assert(dynamic_cast<events::SceneGraphReplaceJoint*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphReplaceJoint*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphReplaceJoint>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_MODIFY_LINK_VISIBILITY)
+  else if (event->type() == events::SceneGraphModifyLinkVisibility::kType)
   {
     assert(dynamic_cast<events::SceneGraphModifyLinkVisibility*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphModifyLinkVisibility*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphModifyLinkVisibility>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_MODIFY_LINK_VISIBILITY_ALL)
+  else if (event->type() == events::SceneGraphModifyLinkVisibilityALL::kType)
   {
     assert(dynamic_cast<events::SceneGraphModifyLinkVisibilityALL*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphModifyLinkVisibilityALL*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneGraphModifyLinkVisibilityALL>(*e));
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_STATE_CHANGED)
+  else if (event->type() == events::SceneStateChanged::kType)
   {
     assert(dynamic_cast<events::SceneStateChanged*>(event) != nullptr);
     auto* e = static_cast<events::SceneStateChanged*>(event);
     if (e->getComponentInfo() == component_info_ || e->getComponentInfo()->isParent(component_info_))
       events_.push_back(std::make_unique<events::SceneStateChanged>(*e));
   }
-  else if (event->type() == events::EventType::PRE_RENDER)
+  else if (event->type() == events::PreRender::kType)
   {
     assert(dynamic_cast<events::PreRender*>(event) != nullptr);
     if (static_cast<events::PreRender*>(event)->getSceneName() == component_info_->getSceneName())

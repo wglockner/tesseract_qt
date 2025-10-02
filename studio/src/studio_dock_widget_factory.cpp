@@ -23,10 +23,10 @@
 
 #include <tesseract_qt/studio/studio_dock_widget_factory.h>
 
-#include <string>
-
 namespace tesseract_gui
 {
-std::string StudioDockWidgetFactory::getSection() { return "Studio"; }
+const std::string StudioDockWidgetFactory::SECTION_NAME = "Studio";
+
+const std::string& StudioDockWidgetFactory::getSectionName() { return StudioDockWidgetFactory::SECTION_NAME; }
 
 }  // namespace tesseract_gui

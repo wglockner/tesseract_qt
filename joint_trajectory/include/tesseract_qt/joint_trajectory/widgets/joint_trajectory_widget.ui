@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>112</height>
+    <height>513</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -132,7 +132,8 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset theme="media-playback-start"/>
+         <iconset theme="media-playback-start">
+          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </item>
@@ -145,7 +146,8 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset theme="media-playback-pause"/>
+         <iconset theme="media-playback-pause">
+          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </item>

@@ -34,7 +34,6 @@
 #include <tesseract_qt/plot/transforms/outlier_removal.h>
 #include <tesseract_qt/plot/transforms/scale_transform.h>
 
-#include <tesseract_qt/common/events/status_log_events.h>
 #include <tesseract_qt/common/events/joint_trajectory_events.h>
 #include <tesseract_qt/common/events/scene_graph_events.h>
 #include <tesseract_qt/common/environment_manager.h>
@@ -48,6 +47,7 @@
 #include <tesseract_environment/environment.h>
 #include <tesseract_visualization/trajectory_player.h>
 #include <set>
+#include <console_bridge/console.h>
 
 #include <QTimer>
 #include <QFileDialog>
@@ -368,8 +368,7 @@ void JointTrajectoryWidget::onCurrentRowChanged(const QModelIndex& current, cons
       {
         std::stringstream sstr;
         sstr << "Error in onCurrentRowChanged default, not updating env state: " << ex.what() << std::endl;
-        events::StatusLogInfo event(sstr.str().c_str());
-        QApplication::sendEvent(qApp, &event);
+        CONSOLE_BRIDGE_logDebug(sstr.str().c_str());
       }
 
       break;
@@ -428,7 +427,7 @@ void JointTrajectoryWidget::onDisablePlayer() { ui_->trajectoryPlayerFrame->setE
 // Documentation inherited
 bool JointTrajectoryWidget::eventFilter(QObject* obj, QEvent* event)
 {
-  if (event->type() == events::EventType::JOINT_TRAJECTORY_OPEN)
+  if (event->type() == events::JointTrajectoryOpen::kType)
   {
     assert(dynamic_cast<events::JointTrajectoryOpen*>(event) != nullptr);
     auto* e = static_cast<events::JointTrajectoryOpen*>(event);
@@ -439,7 +438,7 @@ bool JointTrajectoryWidget::eventFilter(QObject* obj, QEvent* event)
       data_->open_dialog->activateWindow();
     }
   }
-  else if (event->type() == events::EventType::JOINT_TRAJECTORY_SAVE)
+  else if (event->type() == events::JointTrajectorySave::kType)
   {
     assert(dynamic_cast<events::JointTrajectorySave*>(event) != nullptr);
     auto* e = static_cast<events::JointTrajectorySave*>(event);
@@ -455,14 +454,14 @@ bool JointTrajectoryWidget::eventFilter(QObject* obj, QEvent* event)
       }
     }
   }
-  else if (event->type() == events::EventType::JOINT_TRAJECTORY_PLOT)
+  else if (event->type() == events::JointTrajectoryPlot::kType)
   {
     assert(dynamic_cast<events::JointTrajectoryPlot*>(event) != nullptr);
     auto* e = static_cast<events::JointTrajectoryPlot*>(event);
     if (e->getComponentInfo() == data_->model->getComponentInfo())
       onPlot();
   }
-  else if (event->type() == events::EventType::JOINT_TRAJECTORY_REMOVE_SELECTED)
+  else if (event->type() == events::JointTrajectoryRemoveSelected::kType)
   {
     assert(dynamic_cast<events::JointTrajectoryRemoveSelected*>(event) != nullptr);
     auto* e = static_cast<events::JointTrajectoryRemoveSelected*>(event);

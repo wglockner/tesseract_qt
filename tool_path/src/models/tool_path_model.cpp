@@ -189,35 +189,35 @@ bool ToolPathModel::setData(const QModelIndex& index, const QVariant& value, int
 
 bool ToolPathModel::eventFilter(QObject* obj, QEvent* event)
 {
-  if (event->type() == events::EventType::TOOL_PATH_ADD)
+  if (event->type() == events::ToolPathAdd::kType)
   {
     assert(dynamic_cast<events::ToolPathAdd*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathAdd*>(event);
     if (e->getComponentInfo() == data_->component_info)
       addToolPath(e->getToolPath());
   }
-  else if (event->type() == events::EventType::TOOL_PATH_REMOVE)
+  else if (event->type() == events::ToolPathRemove::kType)
   {
     assert(dynamic_cast<events::ToolPathRemove*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathRemove*>(event);
     if (e->getComponentInfo() == data_->component_info)
       removeToolPath(e->getUUID());
   }
-  else if (event->type() == events::EventType::TOOL_PATH_REMOVE_ALL)
+  else if (event->type() == events::ToolPathRemoveAll::kType)
   {
     assert(dynamic_cast<events::ToolPathRemoveAll*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathRemoveAll*>(event);
     if (e->getComponentInfo() == data_->component_info)
       clear();
   }
-  else if (event->type() == events::EventType::TOOL_PATH_HIDE_ALL)
+  else if (event->type() == events::ToolPathHideAll::kType)
   {
     assert(dynamic_cast<events::ToolPathHideAll*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathHideAll*>(event);
     if (e->getComponentInfo() == data_->component_info)
       setCheckedStateRecursive(invisibleRootItem(), Qt::CheckState::Unchecked);
   }
-  else if (event->type() == events::EventType::TOOL_PATH_SHOW_ALL)
+  else if (event->type() == events::ToolPathShowAll::kType)
   {
     assert(dynamic_cast<events::ToolPathShowAll*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathShowAll*>(event);

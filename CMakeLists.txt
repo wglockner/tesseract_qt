@@ -42,7 +42,6 @@ add_subdirectory(workbench)
 set(DEPS
     "Qt5 COMPONENTS Core Gui Widgets Svg OpenGL Xml"
     "Boost COMPONENTS program_options"
-    "boost_plugin_loader"
     "tesseract_collision REQUIRED COMPONENTS core"
     "tesseract_kinematics REQUIRED COMPONENTS core opw"
     "tesseract_task_composer REQUIRED COMPONENTS core planning"
@@ -63,7 +62,6 @@ set(LINUX_DEPENDS
     "libqt5xml5"
     "libgraphviz-dev"
     "libqwt-qt5-6"
-    "boost_plugin_loader"
     "${TESSERACT_PACKAGE_PREFIX}tesseract-common"
     "${TESSERACT_PACKAGE_PREFIX}tesseract-scene-graph"
     "${TESSERACT_PACKAGE_PREFIX}tesseract-environment"
@@ -78,17 +76,16 @@ set(LINUX_DEPENDS
     "${TESSERACT_PACKAGE_PREFIX}tesseract-task-composer-planning")
 
 set(WINDOWS_DEPENDS
-    "libboost-program-options-dev"
-    "libqt5gui5"
-    "libqt5widgets5"
-    "libqt5svg5"
-    "libqt5opengl5"
-    "libqt5xml5"
-    "libgraphviz-dev"
-    "libqwt-qt5-6"
-    "boost_plugin_loader"
-    "${TESSERACT_PACKAGE_PREFIX}tesseract-common"
-    "${TESSERACT_PACKAGE_PREFIX}tesseract-scene-graph"
+  "libboost-program-options-dev"
+  "libqt5gui5"
+  "libqt5widgets5"
+  "libqt5svg5"
+  "libqt5opengl5"
+  "libqt5xml5"
+  "libgraphviz-dev"
+  "libqwt-qt5-6"
+  "${TESSERACT_PACKAGE_PREFIX}tesseract-common"
+  "${TESSERACT_PACKAGE_PREFIX}tesseract-scene-graph
     "${TESSERACT_PACKAGE_PREFIX}tesseract-environment"
     "${TESSERACT_PACKAGE_PREFIX}tesseract-urdf"
     "${TESSERACT_PACKAGE_PREFIX}tesseract-srdf"
@@ -103,10 +100,10 @@ set(WINDOWS_DEPENDS
 if(${BUILD_RENDERING})
   message("Building rendering module")
   add_subdirectory(rendering)
-  if((DEFINED LSB_RELEASE_CODE_SHORT) AND (LSB_RELEASE_CODE_SHORT STREQUAL "noble"))
-    set(GZ_RENDERING gz-rendering8)
+  if((EXISTS LSB_RELEASE_CODE_SHORT) AND (LSB_RELEASE_CODE_SHORT STREQUAL "noble"))
+    set(GZ-RENDERING gz-rendering8)
   else()
-    set(GZ_RENDERING gz-rendering7)
+    set(GZ-RENDERING gz-rendering7)
   endif()
   list(
     APPEND

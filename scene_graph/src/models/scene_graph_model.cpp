@@ -150,35 +150,35 @@ void SceneGraphModel::clear() { data_->clear(); }
 
 bool SceneGraphModel::eventFilter(QObject* obj, QEvent* event)
 {
-  if (event->type() == events::EventType::SCENE_GRAPH_CLEAR)
+  if (event->type() == events::SceneGraphClear::kType)
   {
     assert(dynamic_cast<events::SceneGraphClear*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphClear*>(event);
     if (e->getComponentInfo() == data_->component_info)
       clear();
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_SET)
+  else if (event->type() == events::SceneGraphSet::kType)
   {
     assert(dynamic_cast<events::SceneGraphSet*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphSet*>(event);
     if (e->getComponentInfo() == data_->component_info)
       setSceneGraph(*e->getSceneGraph());
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_ADD_LINK)
+  else if (event->type() == events::SceneGraphAddLink::kType)
   {
     assert(dynamic_cast<events::SceneGraphAddLink*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphAddLink*>(event);
     if (e->getComponentInfo() == data_->component_info)
       addLink(*e->getLink());
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_ADD_JOINT)
+  else if (event->type() == events::SceneGraphAddJoint::kType)
   {
     assert(dynamic_cast<events::SceneGraphAddJoint*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphAddJoint*>(event);
     if (e->getComponentInfo() == data_->component_info)
       addJoint(*e->getJoint());
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_MOVE_LINK)
+  else if (event->type() == events::SceneGraphMoveLink::kType)
   {
     assert(dynamic_cast<events::SceneGraphMoveLink*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphMoveLink*>(event);
@@ -197,28 +197,28 @@ bool SceneGraphModel::eventFilter(QObject* obj, QEvent* event)
       addJoint(*joint);
     }
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_MOVE_JOINT)
+  else if (event->type() == events::SceneGraphMoveJoint::kType)
   {
     assert(dynamic_cast<events::SceneGraphMoveJoint*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphMoveJoint*>(event);
     if (e->getComponentInfo() == data_->component_info)
       data_->scene_graph_item->getJoints().at(e->getJointName())->setParentLink(e->getParentLink().c_str());
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_REMOVE_LINK)
+  else if (event->type() == events::SceneGraphRemoveLink::kType)
   {
     assert(dynamic_cast<events::SceneGraphRemoveLink*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphRemoveLink*>(event);
     if (e->getComponentInfo() == data_->component_info)
       removeLink(e->getLinkName());
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_REMOVE_JOINT)
+  else if (event->type() == events::SceneGraphRemoveJoint::kType)
   {
     assert(dynamic_cast<events::SceneGraphRemoveJoint*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphRemoveJoint*>(event);
     if (e->getComponentInfo() == data_->component_info)
       removeJoint(e->getJointName());
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_REPLACE_JOINT)
+  else if (event->type() == events::SceneGraphReplaceJoint::kType)
   {
     assert(dynamic_cast<events::SceneGraphReplaceJoint*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphReplaceJoint*>(event);
@@ -228,7 +228,7 @@ bool SceneGraphModel::eventFilter(QObject* obj, QEvent* event)
       addJoint(*e->getJoint());
     }
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_MODIFY_LINK_VISIBILITY)
+  else if (event->type() == events::SceneGraphModifyLinkVisibility::kType)
   {
     assert(dynamic_cast<events::SceneGraphModifyLinkVisibility*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphModifyLinkVisibility*>(event);
@@ -254,7 +254,7 @@ bool SceneGraphModel::eventFilter(QObject* obj, QEvent* event)
       }
     }
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_MODIFY_LINK_VISIBILITY_ALL)
+  else if (event->type() == events::SceneGraphModifyLinkVisibilityALL::kType)
   {
     assert(dynamic_cast<events::SceneGraphModifyLinkVisibilityALL*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphModifyLinkVisibilityALL*>(event);
@@ -276,7 +276,7 @@ bool SceneGraphModel::eventFilter(QObject* obj, QEvent* event)
       }
     }
   }
-  else if (event->type() == events::EventType::SCENE_GRAPH_PLOT)
+  else if (event->type() == events::SceneGraphPlot::kType)
   {
     assert(dynamic_cast<events::SceneGraphPlot*>(event) != nullptr);
     auto* e = static_cast<events::SceneGraphPlot*>(event);

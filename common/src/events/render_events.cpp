@@ -33,13 +33,11 @@ RenderEvent::~RenderEvent() = default;
 const std::string& RenderEvent::getSceneName() const { return scene_name_; }
 
 /////////////////////////////////////////////////
-Render::Render(std::string scene_name) : RenderEvent(std::move(scene_name), QEvent::Type(EventType::RENDER)) {}
+Render::Render(std::string scene_name) : RenderEvent(std::move(scene_name), kType) {}
 Render::~Render() = default;
 
 /////////////////////////////////////////////////
 
-PreRender::PreRender(std::string scene_name) : RenderEvent(std::move(scene_name), QEvent::Type(EventType::PRE_RENDER))
-{
-}
+PreRender::PreRender(std::string scene_name) : RenderEvent(std::move(scene_name), kType) {}
 PreRender::~PreRender() = default;
 }  // namespace tesseract_gui::events

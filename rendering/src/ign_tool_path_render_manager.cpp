@@ -205,7 +205,7 @@ void IgnToolPathRenderManager::render()
 
   for (const auto& event : events_)
   {
-    if (event->type() == events::EventType::TOOL_PATH_ADD)
+    if (event->type() == events::ToolPathAdd::kType)
     {
       auto& e = static_cast<events::ToolPathAdd&>(*event);
       // Clear it if it exists
@@ -250,32 +250,32 @@ void IgnToolPathRenderManager::render()
       }
       scene->RootVisual()->AddChild(ign_tool_path);
     }
-    else if (event->type() == events::EventType::TOOL_PATH_REMOVE)
+    else if (event->type() == events::ToolPathRemove::kType)
     {
       auto& e = static_cast<events::ToolPathRemove&>(*event);
       data_->clear(*scene, e.getUUID());
     }
-    else if (event->type() == events::EventType::TOOL_PATH_REMOVE_ALL)
+    else if (event->type() == events::ToolPathRemoveAll::kType)
     {
       auto& e = static_cast<events::ToolPathRemoveAll&>(*event);
       data_->clearAll(component_info_->getSceneName());
     }
-    else if (event->type() == events::EventType::TOOL_PATH_HIDE_ALL)
+    else if (event->type() == events::ToolPathHideAll::kType)
     {
       for (const auto& container : data_->entity_containers)
         data_->setVisibility(*scene, container.first, nil_uuid, false, true);
     }
-    else if (event->type() == events::EventType::TOOL_PATH_SHOW_ALL)
+    else if (event->type() == events::ToolPathShowAll::kType)
     {
       for (const auto& container : data_->entity_containers)
         data_->setVisibility(*scene, container.first, nil_uuid, true, true);
     }
-    else if (event->type() == events::EventType::TOOL_PATH_HIDE)
+    else if (event->type() == events::ToolPathHide::kType)
     {
       auto& e = static_cast<events::ToolPathHide&>(*event);
       data_->setVisibility(*scene, e.getUUID(), e.getChildUUID(), false, false);
     }
-    else if (event->type() == events::EventType::TOOL_PATH_SHOW)
+    else if (event->type() == events::ToolPathShow::kType)
     {
       auto& e = static_cast<events::ToolPathShow&>(*event);
       data_->setVisibility(*scene, e.getUUID(), e.getChildUUID(), true, false);

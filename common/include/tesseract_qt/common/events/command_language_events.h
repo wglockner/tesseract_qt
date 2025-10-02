@@ -39,6 +39,9 @@ public:
 
   const std::string& getNamespace() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CL_COMPOSITE_INSTRUCTION_CLEAR);
+
 private:
   std::string ns_;
 };
@@ -54,6 +57,9 @@ public:
   const std::string& getNamespace() const;
   const tesseract_planning::CompositeInstruction& getCompositeInstruction() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CL_COMPOSITE_INSTRUCTION_SET);
+
 private:
   struct Implementation;
   std::unique_ptr<Implementation> data_;
@@ -67,6 +73,9 @@ public:
                              boost::uuids::uuid uuid,
                              boost::uuids::uuid child_uuid);
   ~CompositeInstructionRemove() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::CL_COMPOSITE_INSTRUCTION_REMOVE);
 };
 
 }  // namespace tesseract_gui::events

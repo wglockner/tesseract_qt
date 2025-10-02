@@ -163,7 +163,7 @@ SnapIntervals::SnapIntervals(const gz::math::Vector3d& _xyz,
                              const gz::math::Vector3d& _rpy,
                              const gz::math::Vector3d& _scale,
                              std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::RENDER)), data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->xyz = _xyz;
   data_->rpy = _rpy;
@@ -183,8 +183,7 @@ gz::math::Vector3d SnapIntervals::getScale() const { return data_->scale; }
 
 /////////////////////////////////////////////////
 SpawnFromDescription::SpawnFromDescription(const std::string& description, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::SPAWN_FROM_DESCRIPTION))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->description = description;
 }
@@ -195,8 +194,7 @@ const std::string& SpawnFromDescription::getDescription() const { return data_->
 
 /////////////////////////////////////////////////
 SpawnFromPath::SpawnFromPath(const std::string& file_path, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::SPAWN_FROM_PATH))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->file_path = file_path;
 }
@@ -207,8 +205,7 @@ const std::string& SpawnFromPath::getFilePath() const { return data_->file_path;
 
 /////////////////////////////////////////////////
 HoverToScene::HoverToScene(const gz::math::Vector3d& point, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::HOVER_TO_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->point = point;
 }
@@ -219,8 +216,7 @@ gz::math::Vector3d HoverToScene::getPoint() const { return data_->point; }
 
 /////////////////////////////////////////////////
 HoverOnScene::HoverOnScene(const gz::common::MouseEvent& mouse, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::HOVER_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->mouse = mouse;
 }
@@ -231,8 +227,7 @@ gz::common::MouseEvent HoverOnScene::getMouse() const { return data_->mouse; }
 
 /////////////////////////////////////////////////
 LeftClickToScene::LeftClickToScene(const gz::math::Vector3d& point, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::LEFT_CLICK_TO_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->point = point;
 }
@@ -243,8 +238,7 @@ gz::math::Vector3d LeftClickToScene::getPoint() const { return data_->point; }
 
 /////////////////////////////////////////////////
 RightClickToScene::RightClickToScene(const gz::math::Vector3d& point, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::RIGHT_CLICK_TO_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->point = point;
 }
@@ -255,8 +249,7 @@ gz::math::Vector3d RightClickToScene::getPoint() const { return data_->point; }
 
 /////////////////////////////////////////////////
 DropdownMenuEnabled::DropdownMenuEnabled(bool menu_enabled, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::DROPDOWN_MENU_ENABLED))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->menu_enabled = menu_enabled;
 }
@@ -267,8 +260,7 @@ bool DropdownMenuEnabled::getMenuEnabled() const { return data_->menu_enabled; }
 
 /////////////////////////////////////////////////
 RightClickOnScene::RightClickOnScene(const gz::common::MouseEvent& mouse, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::RIGHT_CLICK_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->mouse = mouse;
 }
@@ -279,8 +271,7 @@ const gz::common::MouseEvent& RightClickOnScene::getMouse() const { return data_
 
 /////////////////////////////////////////////////
 LeftClickOnScene::LeftClickOnScene(const gz::common::MouseEvent& mouse, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::LEFT_CLICK_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->mouse = mouse;
 }
@@ -291,7 +282,7 @@ const gz::common::MouseEvent& LeftClickOnScene::getMouse() const { return data_-
 
 /////////////////////////////////////////////////
 BlockOrbit::BlockOrbit(bool block, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::BLOCK_ORBIT)), data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->block = block;
 }
@@ -302,8 +293,7 @@ bool BlockOrbit::getBlock() const { return data_->block; }
 
 /////////////////////////////////////////////////
 KeyReleaseOnScene::KeyReleaseOnScene(const gz::common::KeyEvent& key, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::KEY_RELEASE_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->key = key;
 }
@@ -314,8 +304,7 @@ gz::common::KeyEvent KeyReleaseOnScene::getKey() const { return data_->key; }
 
 /////////////////////////////////////////////////
 KeyPressOnScene::KeyPressOnScene(const gz::common::KeyEvent& key, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::KEY_PRESS_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->key = key;
 }
@@ -326,8 +315,7 @@ gz::common::KeyEvent KeyPressOnScene::getKey() const { return data_->key; }
 
 /////////////////////////////////////////////////
 SpawnCloneFromName::SpawnCloneFromName(const std::string& name, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::SPAWN_CLONE_FROM_NAME))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->name = name;
 }
@@ -339,8 +327,7 @@ const std::string& SpawnCloneFromName::getName() const { return data_->name; }
 
 /////////////////////////////////////////////////
 DropOnScene::DropOnScene(const std::string& drop_text, const gz::math::Vector2i& drop_mouse, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::DROP_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->drop_text = drop_text;
   data_->mouse = drop_mouse;
@@ -355,8 +342,7 @@ const gz::math::Vector2i& DropOnScene::getMouse() const { return data_->mouse; }
 
 /////////////////////////////////////////////////
 ScrollOnScene::ScrollOnScene(const gz::common::MouseEvent& mouse, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::SCROLL_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->mouse = mouse;
 }
@@ -367,8 +353,7 @@ const gz::common::MouseEvent& ScrollOnScene::getMouse() const { return data_->mo
 
 /////////////////////////////////////////////////
 DragOnScene::DragOnScene(const gz::common::MouseEvent& mouse, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::DRAG_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->mouse = mouse;
 }
@@ -379,8 +364,7 @@ gz::common::MouseEvent DragOnScene::getMouse() const { return data_->mouse; }
 
 /////////////////////////////////////////////////
 MousePressOnScene::MousePressOnScene(const gz::common::MouseEvent& mouse, std::string scene_name)
-  : RenderEvent(std::move(scene_name), QEvent::Type(EventType::MOUSE_PRESS_ON_SCENE))
-  , data_(std::make_unique<Implementation>())
+  : RenderEvent(std::move(scene_name), kType), data_(std::make_unique<Implementation>())
 {
   data_->mouse = mouse;
 }

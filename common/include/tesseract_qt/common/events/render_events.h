@@ -56,6 +56,9 @@ public:
    */
   PreRender(std::string scene_name);
   ~PreRender() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::PRE_RENDER);
 };
 
 /**
@@ -67,6 +70,9 @@ class Render : public RenderEvent
 public:
   Render(std::string scene_name);
   ~Render() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::RENDER);
 };
 }  // namespace tesseract_gui::events
 #endif  // TESSERACT_QT_COMMON_RENDER_EVENTS_H

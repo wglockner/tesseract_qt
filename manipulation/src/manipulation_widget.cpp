@@ -3,7 +3,6 @@
 
 #include <tesseract_qt/scene_graph/models/scene_state_model.h>
 
-#include <tesseract_qt/common/events/status_log_events.h>
 #include <tesseract_qt/common/events/scene_graph_events.h>
 #include <tesseract_qt/common/events/manipulation_events.h>
 #include <tesseract_qt/common/icon_utils.h>
@@ -15,6 +14,8 @@
 #include <tesseract_srdf/kinematics_information.h>
 #include <tesseract_environment/environment.h>
 #include <tesseract_kinematics/core/kinematic_group.h>
+
+#include <console_bridge/console.h>
 
 #include <QStringList>
 #include <QStringListModel>
@@ -357,7 +358,7 @@ void ManipulationWidget::onGroupNameChanged()
       auto it = group_tcp_offsets.find(group_name);
       if (it != group_tcp_offsets.end())
       {
-        data_->tcp_offsets = tesseract_common::TransformMap{ it->second.begin(), it->second.end() };
+        data_->tcp_offsets = it->second;
         for (const auto& tcp_offset : data_->tcp_offsets)
           tcp_offset_sl.append(tcp_offset.first.c_str());
       }
@@ -620,9 +621,7 @@ void ManipulationWidget::onReset()
       }
       catch (...)
       {
-        std::stringstream sstr;
-        events::StatusLogInfo event(QString("ManipulationWidget, Group %1 is not supported!").arg(group_name.c_str()));
-        QApplication::sendEvent(qApp, &event);
+        CONSOLE_BRIDGE_logDebug("ManipulationWidget, Group '%s' is not supported!", group_name.c_str());
       }
 
       if (kin_group != nullptr)

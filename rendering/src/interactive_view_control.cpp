@@ -287,7 +287,7 @@ void InteractiveViewControl::setViewController(ViewControlType type)
 /////////////////////////////////////////////////
 bool InteractiveViewControl::eventFilter(QObject* obj, QEvent* event)
 {
-  if (event->type() == events::EventType::RENDER)
+  if (event->type() == events::Render::kType)
   {
     assert(dynamic_cast<events::Render*>(event) != nullptr);
     auto* e = static_cast<events::Render*>(event);
@@ -296,7 +296,7 @@ bool InteractiveViewControl::eventFilter(QObject* obj, QEvent* event)
       data_->onRender();
     }
   }
-  else if (event->type() == events::EventType::LEFT_CLICK_ON_SCENE)
+  else if (event->type() == events::LeftClickOnScene::kType)
   {
     assert(dynamic_cast<events::LeftClickOnScene*>(event) != nullptr);
     auto* e = static_cast<events::LeftClickOnScene*>(event);
@@ -307,7 +307,7 @@ bool InteractiveViewControl::eventFilter(QObject* obj, QEvent* event)
       data_->mouse_event = e->getMouse();
     }
   }
-  else if (event->type() == events::EventType::MOUSE_PRESS_ON_SCENE)
+  else if (event->type() == events::MousePressOnScene::kType)
   {
     assert(dynamic_cast<events::MousePressOnScene*>(event) != nullptr);
     auto* e = static_cast<events::MousePressOnScene*>(event);
@@ -319,7 +319,7 @@ bool InteractiveViewControl::eventFilter(QObject* obj, QEvent* event)
       data_->mouse_event = e->getMouse();
     }
   }
-  else if (event->type() == events::EventType::DRAG_ON_SCENE)
+  else if (event->type() == events::DragOnScene::kType)
   {
     if (data_->mouse_press_dirty)
       return QObject::eventFilter(obj, event);
@@ -339,7 +339,7 @@ bool InteractiveViewControl::eventFilter(QObject* obj, QEvent* event)
       data_->mouse_event = e->getMouse();
     }
   }
-  else if (event->type() == events::EventType::SCROLL_ON_SCENE)
+  else if (event->type() == events::ScrollOnScene::kType)
   {
     assert(dynamic_cast<events::ScrollOnScene*>(event) != nullptr);
     auto* e = static_cast<events::ScrollOnScene*>(event);
@@ -350,7 +350,7 @@ bool InteractiveViewControl::eventFilter(QObject* obj, QEvent* event)
       data_->mouse_event = e->getMouse();
     }
   }
-  else if (event->type() == events::EventType::BLOCK_ORBIT)
+  else if (event->type() == events::BlockOrbit::kType)
   {
     assert(dynamic_cast<events::BlockOrbit*>(event) != nullptr);
     auto* e = static_cast<events::BlockOrbit*>(event);
@@ -359,7 +359,7 @@ bool InteractiveViewControl::eventFilter(QObject* obj, QEvent* event)
       data_->block_orbit = e->getBlock();
     }
   }
-  else if (event->type() == events::EventType::HOVER_ON_SCENE)
+  else if (event->type() == events::HoverOnScene::kType)
   {
     data_->hover_dirty = true;
   }

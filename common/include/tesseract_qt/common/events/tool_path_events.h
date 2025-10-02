@@ -50,6 +50,9 @@ public:
 
   const tesseract_gui::ToolPath& getToolPath() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_ADD);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -66,6 +69,9 @@ public:
 
   const boost::uuids::uuid& getUUID() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_REMOVE);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -79,6 +85,9 @@ public:
   ToolPathRemoveAll(std::shared_ptr<const ComponentInfo> component_info);
   ToolPathRemoveAll(const ToolPathRemoveAll& other);
   ~ToolPathRemoveAll() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_REMOVE_ALL);
 };
 
 /** @brief Event called to remove selected a tool paths for a given scene */
@@ -88,6 +97,9 @@ public:
   ToolPathRemoveSelected(std::shared_ptr<const ComponentInfo> component_info);
   ToolPathRemoveSelected(const ToolPathRemoveSelected& other);
   ~ToolPathRemoveSelected() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_REMOVE_SELECTED);
 };
 
 /** @brief Event called to hide a tool path */
@@ -104,6 +116,9 @@ public:
   const boost::uuids::uuid& getUUID() const;
   const boost::uuids::uuid& getChildUUID() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_HIDE);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -117,6 +132,9 @@ public:
   ToolPathHideAll(std::shared_ptr<const ComponentInfo> component_info);
   ToolPathHideAll(const ToolPathHideAll& other);
   ~ToolPathHideAll() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_HIDE_ALL);
 };
 
 /** @brief Event called to show a tool path */
@@ -133,6 +151,9 @@ public:
   const boost::uuids::uuid& getUUID() const;
   const boost::uuids::uuid& getChildUUID() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_SHOW);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -146,6 +167,9 @@ public:
   ToolPathShowAll(std::shared_ptr<const ComponentInfo> component_info);
   ToolPathShowAll(const ToolPathShowAll& other);
   ~ToolPathShowAll() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_SHOW_ALL);
 };
 
 /** @brief Event called to open a tool path for a given scene */
@@ -155,6 +179,9 @@ public:
   ToolPathOpen(std::shared_ptr<const ComponentInfo> component_info);
   ToolPathOpen(const ToolPathOpen& other);
   ~ToolPathOpen() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_OPEN);
 };
 
 /** @brief Event called to save a tool path for a given scene */
@@ -164,6 +191,9 @@ public:
   ToolPathSave(std::shared_ptr<const ComponentInfo> component_info);
   ToolPathSave(const ToolPathSave& other);
   ~ToolPathSave() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::TOOL_PATH_SAVE);
 };
 
 }  // namespace tesseract_gui::events

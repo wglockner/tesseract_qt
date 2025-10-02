@@ -99,28 +99,28 @@ const GroupTCPsStandardItem* GroupTCPsModel::getRoot() const
 
 bool GroupTCPsModel::eventFilter(QObject* obj, QEvent* event)
 {
-  if (event->type() == events::EventType::GROUP_TCPS_SET)
+  if (event->type() == events::GroupTCPsSet::kType)
   {
     assert(dynamic_cast<events::GroupTCPsSet*>(event) != nullptr);
     auto* e = static_cast<events::GroupTCPsSet*>(event);
     if (e->getComponentInfo() == component_info_)
       set(e->getGroupTCPs());
   }
-  else if (event->type() == events::EventType::GROUP_TCPS_ADD)
+  else if (event->type() == events::GroupTCPsAdd::kType)
   {
     assert(dynamic_cast<events::GroupTCPsAdd*>(event) != nullptr);
     auto* e = static_cast<events::GroupTCPsAdd*>(event);
     if (e->getComponentInfo() == component_info_)
       add(e->getGroupName(), e->getTCPName(), e->getTCP());
   }
-  else if (event->type() == events::EventType::GROUP_TCPS_CLEAR)
+  else if (event->type() == events::GroupTCPsClear::kType)
   {
     assert(dynamic_cast<events::GroupTCPsClear*>(event) != nullptr);
     auto* e = static_cast<events::GroupTCPsClear*>(event);
     if (e->getComponentInfo() == component_info_)
       clear();
   }
-  else if (event->type() == events::EventType::GROUP_TCPS_REMOVE)
+  else if (event->type() == events::GroupTCPsRemove::kType)
   {
     assert(dynamic_cast<events::GroupTCPsRemove*>(event) != nullptr);
     auto* e = static_cast<events::GroupTCPsRemove*>(event);
@@ -130,7 +130,7 @@ bool GroupTCPsModel::eventFilter(QObject* obj, QEvent* event)
         remove(entry[0], entry[1]);
     }
   }
-  else if (event->type() == events::EventType::GROUP_TCPS_REMOVE_GROUP)
+  else if (event->type() == events::GroupTCPsRemoveGroup::kType)
   {
     assert(dynamic_cast<events::GroupTCPsRemoveGroup*>(event) != nullptr);
     auto* e = static_cast<events::GroupTCPsRemoveGroup*>(event);

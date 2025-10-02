@@ -23,14 +23,13 @@
 #ifndef TESSERACT_QT_STUDIO_STUDIO_DOCK_WIDGET_FACTORY_H
 #define TESSERACT_QT_STUDIO_STUDIO_DOCK_WIDGET_FACTORY_H
 
-#include <boost_plugin_loader/plugin_loader.h>
-#include <boost_plugin_loader/macros.h>
+#include <tesseract_common/plugin_loader.h>
 
 #include <tesseract_qt/studio/studio_dock_widget.h>
 
 // clang-format off
 #define TESSERACT_ADD_STUDIO_PLUGIN(DERIVED_CLASS, ALIAS)                                           \
-  EXPORT_CLASS_SECTIONED(DERIVED_CLASS, ALIAS, Studio)
+  TESSERACT_ADD_PLUGIN_SECTIONED(DERIVED_CLASS, ALIAS, Studio)
 // clang-format on
 
 namespace tesseract_gui
@@ -45,10 +44,11 @@ public:
 
   virtual StudioDockWidget* create(const QString& name) const = 0;
 
-  static std::string getSection();
+  static const std::string& getSectionName();
 
 protected:
-  friend class boost_plugin_loader::PluginLoader;
+  static const std::string SECTION_NAME;
+  friend class PluginLoader;
 };
 
 template <typename StudioDockWidgetType>

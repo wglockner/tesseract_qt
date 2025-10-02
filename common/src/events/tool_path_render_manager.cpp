@@ -41,56 +41,56 @@ ToolPathRenderManager::~ToolPathRenderManager() = default;
 bool ToolPathRenderManager::eventFilter(QObject* obj, QEvent* event)
 {
   std::scoped_lock lock(mutex_);
-  if (event->type() == events::EventType::TOOL_PATH_ADD)
+  if (event->type() == events::ToolPathAdd::kType)
   {
     assert(dynamic_cast<events::ToolPathAdd*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathAdd*>(event);
     if (e->getComponentInfo() == component_info_)
       events_.push_back(std::make_unique<events::ToolPathAdd>(*e));
   }
-  else if (event->type() == events::EventType::TOOL_PATH_REMOVE)
+  else if (event->type() == events::ToolPathRemove::kType)
   {
     assert(dynamic_cast<events::ToolPathRemove*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathRemove*>(event);
     if (e->getComponentInfo() == component_info_)
       events_.push_back(std::make_unique<events::ToolPathRemove>(*e));
   }
-  else if (event->type() == events::EventType::TOOL_PATH_REMOVE_ALL)
+  else if (event->type() == events::ToolPathRemoveAll::kType)
   {
     assert(dynamic_cast<events::ToolPathRemoveAll*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathRemoveAll*>(event);
     if (e->getComponentInfo() == component_info_)
       events_.push_back(std::make_unique<events::ToolPathRemoveAll>(*e));
   }
-  else if (event->type() == events::EventType::TOOL_PATH_HIDE_ALL)
+  else if (event->type() == events::ToolPathHideAll::kType)
   {
     assert(dynamic_cast<events::ToolPathHideAll*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathHideAll*>(event);
     if (e->getComponentInfo() == component_info_)
       events_.push_back(std::make_unique<events::ToolPathHideAll>(*e));
   }
-  else if (event->type() == events::EventType::TOOL_PATH_SHOW_ALL)
+  else if (event->type() == events::ToolPathShowAll::kType)
   {
     assert(dynamic_cast<events::ToolPathShowAll*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathShowAll*>(event);
     if (e->getComponentInfo() == component_info_)
       events_.push_back(std::make_unique<events::ToolPathShowAll>(*e));
   }
-  else if (event->type() == events::EventType::TOOL_PATH_HIDE)
+  else if (event->type() == events::ToolPathHide::kType)
   {
     assert(dynamic_cast<events::ToolPathHide*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathHide*>(event);
     if (e->getComponentInfo() == component_info_)
       events_.push_back(std::make_unique<events::ToolPathHide>(*e));
   }
-  else if (event->type() == events::EventType::TOOL_PATH_SHOW)
+  else if (event->type() == events::ToolPathShow::kType)
   {
     assert(dynamic_cast<events::ToolPathShow*>(event) != nullptr);
     auto* e = static_cast<events::ToolPathShow*>(event);
     if (e->getComponentInfo() == component_info_)
       events_.push_back(std::make_unique<events::ToolPathShow>(*e));
   }
-  else if (event->type() == events::EventType::PRE_RENDER)
+  else if (event->type() == events::PreRender::kType)
   {
     assert(dynamic_cast<events::PreRender*>(event) != nullptr);
     if (static_cast<events::PreRender*>(event)->getSceneName() == component_info_->getSceneName())

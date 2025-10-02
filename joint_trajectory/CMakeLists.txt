@@ -71,4 +71,4 @@ list(
   ${PROJECT_NAME}_joint_trajectory_models
   ${PROJECT_NAME}_joint_trajectory_widgets)
 set(PROJECT_TARGETS ${PROJECT_TARGETS} PARENT_SCOPE)
-install_targets(TARGETS ${PROJECT_NAME}_joint_trajectory_models ${PROJECT_NAME}_joint_trajectory_widgets)
+

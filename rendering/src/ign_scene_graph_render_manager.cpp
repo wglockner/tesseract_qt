@@ -115,25 +115,25 @@ void IgnSceneGraphRenderManager::render()
 
   for (const auto& event : events_)
   {
-    if (event->type() == events::EventType::SCENE_GRAPH_CLEAR)
+    if (event->type() == events::SceneGraphClear::kType)
     {
       auto& e = static_cast<events::SceneGraphClear&>(*event);
       data_->clear(e.getComponentInfo());
     }
-    else if (event->type() == events::EventType::SCENE_GRAPH_SET)
+    else if (event->type() == events::SceneGraphSet::kType)
     {
       auto& e = static_cast<events::SceneGraphSet&>(*event);
       data_->clear(e.getComponentInfo());
       EntityContainer::Ptr entity_container = getEntityContainer(e.getComponentInfo());
       loadSceneGraph(*scene, *entity_container, *e.getSceneGraph(), "");
     }
-    else if (event->type() == events::EventType::SCENE_GRAPH_ADD_LINK)
+    else if (event->type() == events::SceneGraphAddLink::kType)
     {
       auto& e = static_cast<events::SceneGraphAddLink&>(*event);
       EntityContainer::Ptr entity_container = getEntityContainer(e.getComponentInfo());
       scene->RootVisual()->AddChild(loadLink(*scene, *entity_container, *e.getLink()));
     }
-    else if (event->type() == events::EventType::SCENE_GRAPH_REMOVE_LINK)
+    else if (event->type() == events::SceneGraphRemoveLink::kType)
     {
       auto& e = static_cast<events::SceneGraphRemoveLink&>(*event);
       EntityContainer::Ptr entity_container = getEntityContainer(e.getComponentInfo());
@@ -143,7 +143,7 @@ void IgnSceneGraphRenderManager::render()
         scene->DestroyNodeById(entity.id);
       }
     }
-    else if (event->type() == events::EventType::SCENE_GRAPH_MODIFY_LINK_VISIBILITY)
+    else if (event->type() == events::SceneGraphModifyLinkVisibility::kType)
     {
       auto& e = static_cast<events::SceneGraphModifyLinkVisibility&>(*event);
       EntityContainer::Ptr entity_container = getEntityContainer(e.getComponentInfo());
@@ -212,7 +212,7 @@ void IgnSceneGraphRenderManager::render()
         }
       }
     }
-    else if (event->type() == events::EventType::SCENE_GRAPH_MODIFY_LINK_VISIBILITY_ALL)
+    else if (event->type() == events::SceneGraphModifyLinkVisibilityALL::kType)
     {
       auto& e = static_cast<events::SceneGraphModifyLinkVisibilityALL&>(*event);
       EntityContainer::Ptr entity_container = getEntityContainer(e.getComponentInfo());
@@ -273,7 +273,7 @@ void IgnSceneGraphRenderManager::render()
         }
       }
     }
-    else if (event->type() == events::EventType::SCENE_GRAPH_STATE_CHANGED)
+    else if (event->type() == events::SceneStateChanged::kType)
     {
       auto& e = static_cast<events::SceneStateChanged&>(*event);
       EntityContainer::Ptr entity_container = getEntityContainer(e.getComponentInfo());

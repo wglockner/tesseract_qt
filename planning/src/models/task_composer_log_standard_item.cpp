@@ -59,7 +59,6 @@ void TaskComposerLogStandardItem::ctor(const tesseract_planning::TaskComposerLog
 {
   appendRow(createStandardItemString("description", data.description));
   appendRow(new TaskComposerDataStorageStandardItem("initial_data", data.initial_data));  // NOLINT
-  if (data.context != nullptr)
-    appendRow(new TaskComposerContextStandardItem("context", *data.context));  // NOLINT
+  appendRow(new TaskComposerContextStandardItem("context", *data.context));               // NOLINT
 }
 }  // namespace tesseract_gui

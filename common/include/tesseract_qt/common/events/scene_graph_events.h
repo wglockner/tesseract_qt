@@ -47,6 +47,9 @@ public:
 
   const tesseract_scene_graph::SceneState& getState() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_STATE_CHANGED);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -60,6 +63,9 @@ public:
   SceneGraphClear(std::shared_ptr<const ComponentInfo> component_info);
   SceneGraphClear(const SceneGraphClear& other);
   ~SceneGraphClear() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_CLEAR);
 };
 
 /** @brief Event called when scene graph is set */
@@ -72,6 +78,9 @@ public:
   ~SceneGraphSet() override;
 
   std::shared_ptr<const tesseract_scene_graph::SceneGraph> getSceneGraph() const;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_SET);
 
 private:
   /** @brief Private data pointer */
@@ -90,6 +99,9 @@ public:
 
   std::shared_ptr<const tesseract_scene_graph::Link> getLink() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_ADD_LINK);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -107,6 +119,9 @@ public:
 
   std::shared_ptr<const tesseract_scene_graph::Joint> getJoint() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_ADD_JOINT);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -123,6 +138,9 @@ public:
   ~SceneGraphMoveLink() override;
 
   std::shared_ptr<const tesseract_scene_graph::Joint> getJoint() const;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_MOVE_LINK);
 
 private:
   /** @brief Private data pointer */
@@ -143,6 +161,9 @@ public:
   const std::string& getJointName() const;
   const std::string& getParentLink() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_MOVE_JOINT);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -159,6 +180,9 @@ public:
 
   const std::string& getLinkName() const;
   bool isRecursive() const;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_REMOVE_LINK);
 
 private:
   /** @brief Private data pointer */
@@ -177,6 +201,9 @@ public:
   const std::string& getJointName() const;
   bool isRecursive() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_REMOVE_JOINT);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -193,6 +220,9 @@ public:
   ~SceneGraphReplaceJoint() override;
 
   std::shared_ptr<const tesseract_scene_graph::Joint> getJoint() const;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_REPLACE_JOINT);
 
 private:
   /** @brief Private data pointer */
@@ -215,6 +245,9 @@ public:
   LinkVisibilityFlags getVisibilityFlags() const;
   bool visible() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_MODIFY_LINK_VISIBILITY);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -234,6 +267,9 @@ public:
   LinkVisibilityFlags getVisibilityFlags() const;
   bool visible() const;
 
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_MODIFY_LINK_VISIBILITY_ALL);
+
 private:
   /** @brief Private data pointer */
   class Implementation;
@@ -247,6 +283,9 @@ public:
   SceneGraphPlot(std::shared_ptr<const ComponentInfo> component_info);
   SceneGraphPlot(const SceneGraphPlot& other);
   ~SceneGraphPlot() override;
+
+  /** @brief Unique type for this event. */
+  static const QEvent::Type kType = QEvent::Type(EventType::SCENE_GRAPH_PLOT);
 };
 
 }  // namespace tesseract_gui::events
